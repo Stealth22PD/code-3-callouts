@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Arrest Manager</name>
+    </assembly>
+    <members>
+        <member name="M:Arrest_Manager.API.Functions.RequestTransport_ReturnBoolSuccessful">
+            <summary>
+            Request transport for the nearest suspect that has transport on standby. If multiple suspects are available, requests multi transport automatically.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestTransport_ReturnBoolSuccessful(Rage.Ped,Rage.Vehicle)">
+            <summary>
+            Requests transport for the nearest ped that has transport on standby.
+            </summary>
+            <param name="Cop">Cop to drive the pickup vehicle.</param>
+            <param name="PoliceTransportVehicle">Pickup vehicle to be driven by the cop.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestTowTruckForNearbyVehicle">
+            <summary>
+            Requests tow truck for the nearest valid vehicle.
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestInsurancePickupForNearbyVehicle">
+            <summary>
+            Requests insurance company pickup for the nearest valid vehicle.
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestTowTruckForVehicle(Rage.Vehicle)">
+            <summary>
+            Dispatches a tow truck for the target vehicle.
+            </summary>
+            <param name="VehicleToTow">Must not have occupants and be a valid model that can be towed (no planes etc.).</param>
+        </member>
+        <member name="E:Arrest_Manager.API.Functions.PlayerArrestedPed">
+            <summary>
+            Raised whenever the player arrests a ped. Only raised once per arrested ped.
+            </summary>
+        </member>
+        <member name="T:Arrest_Manager.Main">
+            <summary>
+            Do not rename! Attributes or inheritance based plugins will follow when the API is more in depth.
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.Main.#ctor">
+            <summary>
+            Constructor for the main class, same as the class, do not rename.
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.Main.Finally">
+            <summary>
+            Called when the plugin ends or is terminated to cleanup
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.Main.Initialize">
+            <summary>
+            Called when the plugin is first loaded by LSPDFR
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.Main.startup">
+            <summary>
+             Launches our plugin. If it encounters an error, log it and restart.
+            </summary>
+        </member>
+        <member name="M:Arrest_Manager.Main.Functions_OnOnDutyStateChanged(System.Boolean)">
+            <summary>
+            The event handler mentioned above,
+            </summary>
+        </member>
+    </members>
+</doc>

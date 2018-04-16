@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DeployedProjects>
+    <string>Code 3 Callouts\Code 3 Callouts.vbproj</string>
+  </DeployedProjects>
+  <DirectoryMappings>
+    <Item Key="" Value="INSTALLFOLDER" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION" Value="AudioATTENTION" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\CRIMES" Value="AudioCRIMES" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\BEAT" Value="AudioBEAT" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS" Value="AudioDIRECTIONS" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\DIVISION" Value="AudioDIVISION" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\GENERIC" Value="AudioGENERIC" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE" Value="AudioREPORT_RESPONSE" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\REPORTING" Value="AudioREPORTING" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES" Value="AudioRESPONSE_TYPES" />
+    <Item Key="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE" Value="AudioUNIT_TYPE" />
+    <Item Key="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING" Value="AudioAI_UNIT_RESPONDING" />
+    <Item Key="Police Scanner\Code 3 Audio\OFFICER\RESPONDING" Value="AudioRESPONDING" />
+    <Item Key="Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED" Value="AudioSUSPECT_SPOTTED" />
+  </DirectoryMappings>
+  <FileMappings />
+  <DeploySymbols>false</DeploySymbols>
+</Configuration>

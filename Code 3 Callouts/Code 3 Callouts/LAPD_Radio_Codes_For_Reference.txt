@@ -1,0 +1,224 @@
+LOS ANGELES POLICE DEPARTMENT RADIO CODES
+(Retrieved from: http://www.badge714.org/LAPDcodes.htm)
+
+15A48 
+
+The Unit Number consists of three parts, where the first part is the
+division number, the second part is the type of unit, and the third part is
+the master beat or special unit number.  Therefore, the above unit is a 15th
+division (North Hollywood) 2 man patrol vehicle assigned to master beat 48.  
+
+
+DIVISION NUMBER
+   	
+ 1 	CENTRAL     
+ 2	RAMPART
+ 3 	SOUTHWEST  
+ 4 	HOLLENBECK 
+ 5 	HARBOR          
+ 6 	HOLLYWOOD  
+ 7 	WILSHIRE              
+ 8 	WEST LOS ANGELES                      
+ 9 	VAN NUYS           
+10 	WEST VALLEY  
+11 	NORTHEAST      
+12 	77TH STREET   
+13 	NEWTON STREET       
+14 	PACIFIC                     
+15 	NORTH HOLLYWOOD  
+16 	FOOTHILL                   
+17 	DEVONSHIRE
+18 	SOUTHEAST
+24 	CENTRAL TRAFFIC
+25 	SOUTH TRAFFIC
+34 	WEST TRAFFIC
+35 	VALLEY TRAFFIC	
+
+
+TYPE OF UNIT
+
+A 	TWO MAN PATROL VEHICLE                
+B 	TWO MAN PATROL VAN
+C 	PARKING ENFORCEMENT
+CL 	BICYCLE PATROL
+CRASH	COMMUNITY RESOURCES AGAINST STREET HOODLUMS (Anti-Gang) 
+DV 	DOMESTIC VIOLENCE
+E 	TRAFFIC ENFORCMENT
+F 	FELONY ENFORCEMENT
+FB 	UNIFORMED FOOT PATROL (FOOT BEAT)
+H 	DIVISIONAL HOMICIDE
+IBARS 	FIELD BOOKING
+J 	JUVENILE INVESTIGATOR                            
+JW 	JUVENILE INVESTIGATOR (FEMALE)
+L 	ONE MAN PATROL VEHICLE
+M 	MOTORCYCLE UNIT
+MQ 	SPECIAL MOTORCYLE UNIT  
+MX 	DUI PATROL UNIT             
+OP 	OBSERVATION POST
+P 	SPECIAL DETAIL/EVENTS SUPERVISOR
+Q 	SPECIAL DETAIL/EVENTS UNIT 
+T 	TRAFFIC INVESTIGATOR
+TL      TRAFFIC INVESTIGATOR SUPERVISOR
+U 	REPORT TAKING UNIT
+UC 	UCLA POLICE
+V 	DIVISIONAL VICE INVESTIGATOR  
+VS 	VISITOR SERVICES
+W 	DIVISONAL DETECTIVES
+X 	EXTRA PATROL UNIT
+Z 	SPECIAL PATROL UNIT (RESERVES)  
+
+THE LAST POSITION INDICATES THE MASTER BEAT OR SPECIAL UNIT NUMBER
+(SOME UNITS THAT HAVE THE LAST DIGIT OF 0 ARE SPECIAL UNITS) 
+
+10 	WATCH COMMANDER                                              
+20-70 	FIELD SUPERVISOR 
+80 	COMMUNITY RELATIONS
+90 	STATION DESK
+
+
+CITYWIDE UNITS
+
+SUPPORT SERVICES ("DAVID" UNITS):
+
+1D  	FIELD SUPPORT SERVICES
+2D  	AIRCRAFT SUPPORT SERVICES
+3D      TACTICAL PLANNING
+
+ADMINISTRATIVE SERVICES ("HENRY" UNITS): 
+
+1H  	DETENTIONS/JAIL                              
+2H  	SCIENTIFIC INVESTIGATIONS
+2H2     BOMB SQUAD
+2H90    CRIME LAB
+2H90B   PHOTO LAB
+2H90C   LATENT PRINTS                               
+3H  	ADVANCE PALNNING                         
+4H  	MOTOR TRANSPORTATION                  
+5H  	PERSONNEL                               
+6H  	MANAGEMENT SERVICES  
+8H  	FISCAL SERVICES
+9H  	PROPERTY MANAGEMENT  
+10H 	COMMUNICATIONS 
+12H 	RECORDS & IDENTIFICATION
+13H 	SUPPLIES
+14H 	TRAINING 
+
+INVESTIGATIVE SERVICES ("KING" UNITS):
+
+1K      INVESTIGATIVE SERVICES HEADQUARTERS
+2K 	BURGARY/AUTO THEFTS  
+3K 	BUNCO/FORGERY 
+4K 	ROBBERY/HOMICIDE
+5K      DETECTIVE SUPPORT SECTION
+5K90    SPECIAL INVESTIGATIVE SECTION
+5K90C   CRIMINAL CONSPIRACY SECTION
+5K90G   GANG SECTION
+5K90F   FUGITIVE SECTION
+
+METROPOLITAN (METRO) DIVISION ("ROBERT" UNITS):
+
+R plus Unit Number plus:
+
+A       ADMINISTRATIVE PLATOON
+B       VALLEY PLATOON
+C       METRO AREA PLATOON
+D       SPECIAL WEAPONS AND TACTICS (SWAT) TEAM
+E       EQUESTRIAN UNIT
+G       METRO ANTI-GANG TASK FORCE ? 
+
+SPECIAL SERVICES ("Y" UNITS)
+
+2Y      INTERNAL AFFAIRS 
+4Y      ORGANIZED CRIME INTELLIGENCE
+5Y      ANTI-TERRORIST UNIT
+6Y      VICE ADMINISTRATION    
+7Y	NARCOTICS - TASK FORCE AND SPECIAL UNITS 
+8Y	NARCOTICS - FIELD ENFORCEMENT
+9Y 	NARCOTICS - MAJOR and MID-LEVEL ENFORCEMENT
+
+
+LOS ANGELES POLICE DEPARTMENT CODES
+
+RADIO CODES
+
+Code 1          Acknowledge Call/Respond Over Radio
+Code 2          Routine Call, No Lights or Siren
+Code 2-HIGH     Priority Call, No Lights or Siren 
+Code 3          Emergency Call, Lights and Siren 
+Code 4          No Further Assistance Needed
+Code 5          Stakeout - Stay Away
+Code 6          Out of Car on Investigation
+Code 6A         Out of Car on Investigation, Requires Assistance    
+Code 6C         Out of Car on Investigation, Suspect is Wanted
+Code 6G         Out of Car on Investigation, Gang Activity        
+Code 7          Meal Break
+Code 8          Fire Alarm
+Code 8A         Working Fire
+Code 10         Request to Clear Frequency for Crime Broadcast
+Code 12         False Alarm
+Code 20         Notify Media
+Code 30         Burglar Alarm (Code 30 Ringer or Code 30 Silent)
+Code 37         Vehicle is Reported Stolen
+Code 77         Caution, Possible Ambush
+Code 99         Emergency
+Code 100        In Position to Intercept
+
+
+COMMONLY USED PENAL CODES USED AS RADIO CODES
+
+148             Resisting Arrest
+187             Homicide
+207             Kidnapping
+211             Armed Robbery
+211 SILENT      Silent Holdup Alarm
+240             Assault
+242             Battery
+245             Assault With Deadly Weapon
+246             Shooting in Dwelling
+261             Rape
+288             Lewd Conduct
+311             Indecent Exposure 
+374             Illegal Dumping
+390             Intoxicated Person
+415             Disturbance
+417             Person With a Gun
+451             Arson
+459             Burglary
+470             Forgery
+480             Hit and Run
+484             Theft
+487             Grand Theft
+488             Petty Theft
+502             Driving Under the Influence (DUI) 
+
+
+CALIFORNIA STANDARD 10-CODES
+
+10-10           Out of Service
+10-11           Talk Slower
+10-12           Visitors Present
+10-14           Escort
+10-15           Enroute With Prisoner
+10-16           Pick Up Prisoner
+10-17           Pick Up Document
+10-23           Stand-By
+10-24           Trouble at Station
+10-27           Check Driver's License
+10-34           Resume Normal Broadcast
+10-35           Confidential Information
+10-36           Correct Time
+10-37           Name of Operator
+10-39           Message Delivered
+10-86           Traffic Check
+10-97           Arriving On Scene
+10-98           Assignment Complete
+10-99           Emergency
+ 
+
+OTHER TERMINOLOGY
+
+AC              Aircraft Crash
+BT              Bomb Threat
+PR              Person Reporting (Complaintant)
+RD              Reporting District (Division plus Master Beat)
+TC              Traffic Collision

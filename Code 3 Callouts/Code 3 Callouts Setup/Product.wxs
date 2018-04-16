@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define Code 3 Callouts_TargetDir=$(var.Code 3 Callouts.TargetDir)?>
+  <Product Id="*" Name="Code 3 Callouts" Language="1033" Version="1.2.1.0" Manufacturer="Stealth22" UpgradeCode="970d8906-6ebc-446b-8359-bba7fbe3af77">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="RETAILDIR">
+      <RegistrySearch Id="InstallPathRetail" Root="HKLM" Key="Software\Rockstar Games\Grand Theft Auto V" Name="InstallFolder" Win64="no" Type="raw" />
+    </Property>
+
+    <Property Id="STEAMDIR">
+      <RegistrySearch Id="InstallPathSteam" Root="HKLM" Key="Software\Rockstar Games\GTAV" Name="InstallFolderSteam" Win64="no" Type="raw" />
+    </Property>
+    
+    <Property Id="GTAFOUND" Value="no"></Property>
+
+    <!--<SetProperty Action="SetTargetRetail" Id="INSTALLFOLDER" Before="AppSearch" Value="[RETAILDIR]"><![CDATA[STEAMDIR=""]]></SetProperty>
+    <SetProperty Action="SetTargetSteam" Id="INSTALLFOLDER" After="SetTargetRetail" Value="[STEAMDIR]"><![CDATA[RETAILDIR=""]]></SetProperty>-->
+
+    <CustomAction Id="GetGTAFolder" Script="vbscript">
+      <![CDATA[         
+        valueSteam = Session.Property("STEAMDIR")
+        valueRetail = Session.Property("RETAILDIR")
+        
+        If valueSteam <> "" Then
+          If Right(valueSteam, 5) = "\GTAV" Then
+            valueSteam = Left(valueSteam, Len(valueSteam) - 5) 
+            Session.Property("STEAMDIR") = valueSteam
+            
+            Session.Property("GTAFOUND") = "yes"  
+            Session.Property("INSTALLFOLDER") = valueSteam  
+          End If
+        Else
+          If valueRetail <> "" Then
+            Session.Property("GTAFOUND") = "yes"  
+            Session.Property("INSTALLFOLDER") = valueRetail  
+          End If
+        End If
+      ]]>
+    </CustomAction>
+    
+    <Condition Message="You must have Administrator privileges to run this installation.">Privileged</Condition>
+
+    <Condition Message="Grand Theft Auto V was not found on your system, or your installation is corrupt."><![CDATA[(RETAILDIR OR STEAMDIR) OR Installed]]></Condition>
+    <!--<Condition Message="References to both the Retail and Steam copies of Grand Theft Auto V were found on your system. You will likely need to reinstall the game."><![CDATA[(RETAILDIR XOR STEAMDIR) OR Installed]]></Condition>-->
+
+    <InstallExecuteSequence>
+      <Custom Action="GetGTAFolder" Before="AppSearch">NOT REMOVE</Custom>
+    </InstallExecuteSequence>
+
+    <Feature Id="ProductFeature" Title="Code 3 Callouts" Level="1">
+      <ComponentGroupRef Id="GTAV_Files" />
+      <ComponentGroupRef Id="LSPDFRPlugins_Files" />
+      <ComponentGroupRef Id="ATTENTION_files" />
+      <ComponentGroupRef Id="AudioBEAT_files" />
+      <ComponentGroupRef Id="AudioCRIMES_files" />
+      <ComponentGroupRef Id="AudioDIRECTIONS_files" />
+      <ComponentGroupRef Id="AudioDIVISION_files" />
+      <ComponentGroupRef Id="AudioGENERIC_files" />
+      <ComponentGroupRef Id="AudioREPORTING_files" />
+      <ComponentGroupRef Id="AudioREPORT_RESPONSE_files" />
+      <ComponentGroupRef Id="AudioRESPONSE_TYPES_files" />
+      <ComponentGroupRef Id="AudioUNIT_TYPE_files" />
+      <ComponentGroupRef Id="AudioAI_UNIT_RESPONDING_files" />
+      <ComponentGroupRef Id="AudioRESPONDING_files" />
+      <ComponentGroupRef Id="AudioSUSPECT_SPOTTED_files" />
+    </Feature>
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="INSTALLFOLDER" Name="Grand Theft Auto V">
+        <Directory Id="LspdfrFolder" Name="LSPDFR">
+          <Directory Id="PoliceScanner" Name="Police Scanner">
+            <Directory Id="Code3Audio" Name="Code 3 Audio">
+
+              <Directory Id="AudioDISPATCH" Name="DISPATCH">
+                <Directory Id="AudioATTENTION" Name="ATTENTION"></Directory>
+                <Directory Id="AudioBEAT" Name="BEAT"></Directory>
+                <Directory Id="AudioCRIMES" Name="CRIMES"></Directory>
+                <Directory Id="AudioDIRECTIONS" Name="DIRECTIONS"></Directory>
+                <Directory Id="AudioDIVISION" Name="DIVISION"></Directory>
+                <Directory Id="AudioGENERIC" Name="GENERIC"></Directory>
+                <Directory Id="AudioREPORT_RESPONSE" Name="REPORT_RESPONSE"></Directory>
+                <Directory Id="AudioREPORTING" Name="REPORTING"></Directory>
+                <Directory Id="AudioRESPONSE_TYPES" Name="RESPONSE_TYPES"></Directory>
+                <Directory Id="AudioUNIT_TYPE" Name="UNIT_TYPE"></Directory>
+              </Directory>
+
+              <Directory Id="AudioOFFICER" Name="OFFICER">
+                <Directory Id="AudioAI_UNIT_RESPONDING" Name="AI_UNIT_RESPONDING"></Directory>
+                <Directory Id="AudioRESPONDING" Name="RESPONDING"></Directory>
+                <Directory Id="AudioSUSPECT_SPOTTED" Name="SUSPECT_SPOTTED"></Directory>
+              </Directory>
+
+            </Directory>
+          </Directory>
+        </Directory>
+
+        <Directory Id="Plugins" Name="Plugins">
+          <Directory Id="LSPDFRPlugins" Name="LSPDFR"></Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="GTAV_Files" Directory="INSTALLFOLDER">
+      <Component Id="LAPD_Radio_Codes_For_Reference.txt" Guid="40b38e9f-8d9c-4d74-b631-7196ec061a93">
+        <File Id="LAPD_Radio_Codes_For_Reference.txt" Name="LAPD_Radio_Codes_For_Reference.txt" Source="$(var.Code 3 Callouts_TargetDir)LAPD_Radio_Codes_For_Reference.txt" />
+      </Component>
+      <Component Id="RAGENativeUI.dll" Guid="d395423b-117a-4d70-9dbc-7dcb37524e1e" Permanent="yes">
+        <File Id="RAGENativeUI.dll" Name="RAGENativeUI.dll" Source="$(var.Code 3 Callouts_TargetDir)RAGENativeUI.dll" />
+      </Component>
+      <Component Id="Stealth.Common.dll" Guid="addb6498-1cb4-4750-8e7b-4ebbd47cb6c3" Permanent="yes">
+        <File Id="Stealth.Common.dll" Name="Stealth.Common.dll" Source="$(var.Code 3 Callouts_TargetDir)Stealth.Common.dll" />
+      </Component>
+      <Component Id="Code_3_Callouts_Documentation.pdf" Guid="1690f8a2-d3ad-4813-9361-c232a6a9db99">
+        <File Id="Code_3_Callouts_Documentation.pdf" Name="Code 3 Callouts Documentation.pdf" Source="$(var.Code 3 Callouts_TargetDir)Code 3 Callouts Documentation.pdf" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="LSPDFRPlugins_Files" Directory="LSPDFRPlugins">
+      <Component Id="Code_3_Callouts.dll" Guid="9ad394b9-0e62-49fe-99f8-63023fa71034">
+        <File Id="Code_3_Callouts.dll" Name="Code 3 Callouts.dll" Source="$(var.Code 3 Callouts_TargetDir)Code 3 Callouts.dll" />
+      </Component>
+      <Component Id="Code_3_Callouts.ini" Guid="809e58f1-d663-4d6c-960f-17bfaeb7fb96">
+        <File Id="Code_3_Callouts.ini" Name="Code 3 Callouts.ini" Source="$(var.Code 3 Callouts_TargetDir)Code 3 Callouts.ini" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ATTENTION_files" Directory="AudioATTENTION">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_ATTENTION_ALL_UNITS.wav" Guid="189ca461-83aa-4461-964d-21eea90d85c9">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_ATTENTION_ALL_UNITS.wav" Name="ATTENTION_ALL_UNITS.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\ATTENTION_ALL_UNITS.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_DISPATCH_CALLING_UNIT.wav" Guid="fbc57d1e-f6a9-459e-ae1a-c6c62da20c8a">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_DISPATCH_CALLING_UNIT.wav" Name="DISPATCH_CALLING_UNIT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\DISPATCH_CALLING_UNIT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_SUSPECT_IN_CUSTODY.wav" Guid="99ff31ea-0d99-4c18-aaa8-c05a2662a9bb">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_ATTENTION_SUSPECT_IN_CUSTODY.wav" Name="SUSPECT_IN_CUSTODY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\SUSPECT_IN_CUSTODY.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioBEAT_files" Directory="AudioBEAT">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_01.wav" Guid="ea64080c-d853-44f6-9491-02319bfd749c">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_01.wav" Name="BEAT_01.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_01.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_02.wav" Guid="fcd03db0-0536-4c8b-bfc3-d11699489deb">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_02.wav" Name="BEAT_02.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_02.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_03.wav" Guid="832c7144-d0b4-4fcf-b119-28b7200a7798">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_03.wav" Name="BEAT_03.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_03.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_04.wav" Guid="8670081e-3f6d-4047-8e4c-1f4e1cc57c34">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_04.wav" Name="BEAT_04.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_04.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_05.wav" Guid="00162fa2-02ee-4ab9-a58f-7b572ae93552">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_05.wav" Name="BEAT_05.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_05.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_06.wav" Guid="86f472a9-878c-4ed3-a571-d0f73c15b2e1">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_06.wav" Name="BEAT_06.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_06.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_07.wav" Guid="82edeac9-9b5d-437d-afc2-52fd7cfb38cc">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_07.wav" Name="BEAT_07.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_07.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_08.wav" Guid="4fd71620-9a14-41d0-91b8-193e234b2eb2">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_08.wav" Name="BEAT_08.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_08.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_09.wav" Guid="3c9625ef-2197-4a81-9c17-fde016bb647d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_09.wav" Name="BEAT_09.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_09.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_10.wav" Guid="4c5b9321-1f67-4dc9-83eb-9874a98370f0">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_10.wav" Name="BEAT_10.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_10.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_11.wav" Guid="88f03e8c-0739-46ca-a183-614f749f6dfa">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_11.wav" Name="BEAT_11.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_11.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_12.wav" Guid="0b3300b5-1a2f-4b6f-b5c8-daf2f297be30">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_12.wav" Name="BEAT_12.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_12.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_13.wav" Guid="f5a780d0-355c-4bb5-b076-a57b3517e0cb">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_13.wav" Name="BEAT_13.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_13.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_14.wav" Guid="7b0cc511-1f92-453e-bc0b-e74af5e375c4">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_14.wav" Name="BEAT_14.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_14.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_15.wav" Guid="6b596ee2-cda7-4696-8cbc-d4d59ea6d3f6">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_15.wav" Name="BEAT_15.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_15.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_16.wav" Guid="76ea720b-f718-41ec-bbb6-6ca7f92054c6">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_16.wav" Name="BEAT_16.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_16.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_17.wav" Guid="a34a701c-2bb5-426b-8b7a-a6f1e3d1a078">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_17.wav" Name="BEAT_17.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_17.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_18.wav" Guid="272643a6-fb1e-4ba9-8996-459e4fa21728">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_18.wav" Name="BEAT_18.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_18.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_19.wav" Guid="ada28f9f-dd45-49e0-b316-522849a3b242">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_19.wav" Name="BEAT_19.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_19.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_20.wav" Guid="c6ef32ee-72f5-4b78-920b-6e7152e44759">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_20.wav" Name="BEAT_20.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_20.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_21.wav" Guid="7061ec52-d25c-407d-8ea3-051012303937">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_21.wav" Name="BEAT_21.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_21.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_22.wav" Guid="57bf1fb5-03e9-44c8-9ded-6096e6ccb8e2">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_22.wav" Name="BEAT_22.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_22.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_23.wav" Guid="16f5e27b-7b62-47dd-a0f8-ab744ac2bd50">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_23.wav" Name="BEAT_23.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_23.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_24.wav" Guid="439d52d5-6117-4228-81c6-b2f11c5b6972">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_BEAT_BEAT_24.wav" Name="BEAT_24.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_24.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioCRIMES_files" Directory="AudioCRIMES">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_ASSAULT.wav" Guid="7f78de33-68a7-4c89-8e6e-4bb1f7dd1454">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_ASSAULT.wav" Name="ASSAULT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\ASSAULT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_ASSAULT_ON_A_CIVILIAN.wav" Guid="77e0f918-7a7a-4ce7-a4f8-75508dcd7cfb">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_ASSAULT_ON_A_CIVILIAN.wav" Name="ASSAULT_ON_A_CIVILIAN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\ASSAULT_ON_A_CIVILIAN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_A_DUI.wav" Guid="20ebd17c-ac70-461d-abb4-0fe2714a036e">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_A_DUI.wav" Name="A_DUI.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\A_DUI.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CARJACKING.wav" Guid="3ae15977-5cb5-4278-9708-e04344a2d80b">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CARJACKING.wav" Name="CARJACKING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CARJACKING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CIV_ASSISTANCE.wav" Guid="dca7496d-ac3c-4f9b-82b2-73580a1f1d3d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CIV_ASSISTANCE.wav" Name="CIV_ASSISTANCE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CIV_ASSISTANCE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_187.wav" Guid="0e2678b5-1207-40fb-b165-a524dbba44b9">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_187.wav" Name="CODE_187.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_187.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_211.wav" Guid="da1b800e-3490-4792-b1b1-e7f199bb795f">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_211.wav" Name="CODE_211.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_211.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_240.wav" Guid="ad59e5b1-d292-4c3c-87c0-2ad39ce87a88">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_240.wav" Name="CODE_240.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_240.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_390.wav" Guid="38924fb8-1075-4fae-8958-a357dbdcf811">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_390.wav" Name="CODE_390.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_390.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_417.wav" Guid="bf4556ed-e685-4ca6-ad7d-14555024d426">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_417.wav" Name="CODE_417.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_417.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_459.wav" Guid="783d6ace-3b63-4ab7-aad2-294aa10862ca">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_459.wav" Name="CODE_459.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_459.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_480.wav" Guid="f28e02c6-9c6b-4d9b-9db4-1785b0c8b7ab">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_480.wav" Name="CODE_480.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_480.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_484.wav" Guid="eac76144-d5df-4e19-a312-f6fafbf7fb4b">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_484.wav" Name="CODE_484.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_484.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_502.wav" Guid="043ca87b-3362-4fcd-8501-2773639ec5c5">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_CODE_502.wav" Name="CODE_502.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_502.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_DRIVER_UNDER_INFLUENCE.wav" Guid="41fc34e2-1888-4445-ab74-b28b0627a40e">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_DRIVER_UNDER_INFLUENCE.wav" Name="DRIVER_UNDER_INFLUENCE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\DRIVER_UNDER_INFLUENCE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_HIT_AND_RUN.wav" Guid="2e434165-0543-491c-87a3-87c271c0a96b">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_HIT_AND_RUN.wav" Name="HIT_AND_RUN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\HIT_AND_RUN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_HOMICIDE.wav" Guid="cb158219-148b-4ba6-8ae9-9ed9401ddd9a">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_HOMICIDE.wav" Name="HOMICIDE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\HOMICIDE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_MOTOR_VEHICLE_ACCIDENT.wav" Guid="1a8994f3-f2c9-49d4-9378-8012668a7cbe">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_MOTOR_VEHICLE_ACCIDENT.wav" Name="MOTOR_VEHICLE_ACCIDENT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\MOTOR_VEHICLE_ACCIDENT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_MUGGING.wav" Guid="cee34b33-b97b-4961-8e28-7cad543cbd2b">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_MUGGING.wav" Name="MUGGING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\MUGGING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_OFFICER_IN_NEED_OF_ASSISTANCE.wav" Guid="f0c37e6f-ad90-4036-8dc9-0986d28c5987">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_OFFICER_IN_NEED_OF_ASSISTANCE.wav" Name="OFFICER_IN_NEED_OF_ASSISTANCE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\OFFICER_IN_NEED_OF_ASSISTANCE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_OFFICER_NOT_RESPONDING.wav" Guid="ad419087-56c9-4615-8bb8-b6f02f273ae5">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_OFFICER_NOT_RESPONDING.wav" Name="OFFICER_NOT_RESPONDING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\OFFICER_NOT_RESPONDING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PERSON_STEALING_A_CAR.wav" Guid="2e22790a-2739-4554-b2d1-93c2ecd5b146">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PERSON_STEALING_A_CAR.wav" Name="PERSON_STEALING_A_CAR.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PERSON_STEALING_A_CAR.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PERSON_WITH_FIREARM.wav" Guid="f04227cd-0ed6-46a6-b343-65bbe5477238">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PERSON_WITH_FIREARM.wav" Name="PERSON_WITH_FIREARM.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PERSON_WITH_FIREARM.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_211.wav" Guid="aa7f9e25-9006-4c76-9e38-89f07e2659e6">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_211.wav" Name="POSSIBLE_211.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_211.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_390.wav" Guid="6c6cef7d-e92d-42c0-97ad-488a630dc6ef">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_390.wav" Name="POSSIBLE_390.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_390.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_459.wav" Guid="63f24760-5973-480a-a3a0-0cf529d67487">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_459.wav" Name="POSSIBLE_459.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_459.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_480.wav" Guid="aa77e776-edb8-43a1-b6c2-9a72f8fc1030">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_480.wav" Name="POSSIBLE_480.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_480.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_502.wav" Guid="0e67f2b6-5fe3-4a51-bc53-458bfad56cdb">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_502.wav" Name="POSSIBLE_502.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_502.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PUBLIC_INTOX.wav" Guid="2786c9bd-d291-4297-8eab-f3bdddf5903d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PUBLIC_INTOX.wav" Name="PUBLIC_INTOX.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PUBLIC_INTOX.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_SUSPICIOUS_VEHICLE.wav" Guid="2990bf04-0693-429d-b6a9-5c5134f18ed8">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_SUSPICIOUS_VEHICLE.wav" Name="SUSPICIOUS_VEHICLE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\SUSPICIOUS_VEHICLE.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioDIRECTIONS_files" Directory="AudioDIRECTIONS">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_EASTBOUND.wav" Guid="506cdc81-bb23-4fc2-8e31-07a64b643ab2">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_EASTBOUND.wav" Name="DIR_EASTBOUND.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_EASTBOUND.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_HEADING.wav" Guid="d8cf8cd6-97b3-477a-bd59-d26903a7efd1">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_HEADING.wav" Name="DIR_HEADING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_HEADING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_NORTHBOUND.wav" Guid="35f34ee0-5c68-466f-ab5e-65bf530c9e04">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_NORTHBOUND.wav" Name="DIR_NORTHBOUND.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_NORTHBOUND.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_SOUTHBOUND.wav" Guid="88189f8b-b40a-4182-8759-947f5305a743">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_SOUTHBOUND.wav" Name="DIR_SOUTHBOUND.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_SOUTHBOUND.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_WESTBOUND.wav" Guid="6cc8b300-6b31-461e-9074-768acf0b29d1">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIRECTIONS_DIR_WESTBOUND.wav" Name="DIR_WESTBOUND.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_WESTBOUND.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioDIVISION_files" Directory="AudioDIVISION">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_01.wav" Guid="615aa421-35d1-4ab7-a239-3b4b101a118d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_01.wav" Name="DIV_01.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_01.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_02.wav" Guid="d33f20bd-c411-4410-a2e1-4346b7883f2f">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_02.wav" Name="DIV_02.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_02.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_03.wav" Guid="75081e36-ac1f-4cc5-a777-e8b4b26f8fec">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_03.wav" Name="DIV_03.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_03.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_04.wav" Guid="789e64db-f40a-4f5f-9ba1-62f157eb9076">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_04.wav" Name="DIV_04.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_04.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_05.wav" Guid="f5fbec32-1edc-4932-b7fd-5efb9a7ae642">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_05.wav" Name="DIV_05.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_05.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_06.wav" Guid="40410560-5469-4339-a278-dc812a61d7fd">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_06.wav" Name="DIV_06.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_06.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_07.wav" Guid="079859cc-8400-411a-b58e-f6c28f401e3e">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_07.wav" Name="DIV_07.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_07.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_08.wav" Guid="3f0793da-0120-49f6-aea8-8d87472ca97f">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_08.wav" Name="DIV_08.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_08.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_09.wav" Guid="59bd59d3-bd10-4a59-aec7-49bbea0be7f4">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_09.wav" Name="DIV_09.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_09.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_10.wav" Guid="c77a96f8-8e5a-421a-9f52-089208640723">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_DIVISION_DIV_10.wav" Name="DIV_10.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_10.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioGENERIC_files" Directory="AudioGENERIC">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_GENERIC_DISPATCH_INTRO_02.wav" Guid="b41b7a87-cbea-4142-9b16-cee8bc002133">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_GENERIC_DISPATCH_INTRO_02.wav" Name="DISPATCH_INTRO_02.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\GENERIC\DISPATCH_INTRO_02.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_GENERIC_OUTRO_03.wav" Guid="0af74a58-7e8e-4758-9ddf-ea7f617f86e1">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_GENERIC_OUTRO_03.wav" Name="OUTRO_03.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\GENERIC\OUTRO_03.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioREPORTING_files" Directory="AudioREPORTING">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_CITIZENS_REPORT.wav" Guid="ec7f20c7-aeee-49ae-8bd4-876ba61ac569">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_CITIZENS_REPORT.wav" Name="CITIZENS_REPORT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORTING\CITIZENS_REPORT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_OFFICERS_REPORT.wav" Guid="3b124b20-1b5d-4219-bd2a-0ee243e941b0">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_OFFICERS_REPORT.wav" Name="OFFICERS_REPORT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORTING\OFFICERS_REPORT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_UNITS_REPORTING.wav" Guid="d4f2dd04-a04c-4fb9-be91-683e96690cc7">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_UNITS_REPORTING.wav" Name="UNITS_REPORTING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORTING\UNITS_REPORTING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_WEVE_GOT.wav" Guid="b4eb70db-c6e2-4585-b207-422cf32d6e87">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_WEVE_GOT.wav" Name="WEVE_GOT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORTING\WEVE_GOT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_WE_HAVE.wav" Guid="640d05fe-8876-41e1-8ef8-e6b71d38cc19">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORTING_WE_HAVE.wav" Name="WE_HAVE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORTING\WE_HAVE.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioREPORT_RESPONSE_files" Directory="AudioREPORT_RESPONSE">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_ROGER.wav" Guid="9b7c7812-0f35-4ccb-8db8-c69bffa2218e">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_ROGER.wav" Name="ROGER.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\ROGER.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_ROGER_THAT.wav" Guid="23ce6fa8-38d8-402a-9a95-ba45e1109882">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_ROGER_THAT.wav" Name="ROGER_THAT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\ROGER_THAT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_TEN_FOUR.wav" Guid="13c3913c-aa4b-4ec1-8bdd-2f8e2196aed3">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_TEN_FOUR.wav" Name="TEN_FOUR.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\TEN_FOUR.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_TEN_FOUR_COPY_THAT.wav" Guid="06f376fa-d232-4455-a454-b026e3467ad5">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_REPORT_RESPONSE_TEN_FOUR_COPY_THAT.wav" Name="TEN_FOUR_COPY_THAT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\TEN_FOUR_COPY_THAT.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioRESPONSE_TYPES_files" Directory="AudioRESPONSE_TYPES">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_ALL_UNITS_RESPOND_CODE_99_EMERGENCY.wav" Guid="21db161e-931b-4401-bd83-f5e51e3de89d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_ALL_UNITS_RESPOND_CODE_99_EMERGENCY.wav" Name="ALL_UNITS_RESPOND_CODE_99_EMERGENCY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\ALL_UNITS_RESPOND_CODE_99_EMERGENCY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_CODE_99_ALL_UNITS_RESPOND.wav" Guid="db0e26c2-c450-4f37-8ad1-9a8f045c9a5c">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_CODE_99_ALL_UNITS_RESPOND.wav" Name="CODE_99_ALL_UNITS_RESPOND.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\CODE_99_ALL_UNITS_RESPOND.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_NO_FURTHER_UNITS_REQUIRED.wav" Guid="a5659569-904a-4cee-8fc4-347fb497c494">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_NO_FURTHER_UNITS_REQUIRED.wav" Name="NO_FURTHER_UNITS_REQUIRED.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\NO_FURTHER_UNITS_REQUIRED.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_RESPOND_CODE_2.wav" Guid="872e56a2-8279-427f-a5d2-ba30adab2840">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_RESPOND_CODE_2.wav" Name="RESPOND_CODE_2.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\RESPOND_CODE_2.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_RESPOND_CODE_3.wav" Guid="a146c46e-5633-4059-85ef-c54d17038d59">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_RESPOND_CODE_3.wav" Name="RESPOND_CODE_3.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\RESPOND_CODE_3.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_UNITS_RESPOND_CODE_2.wav" Guid="e2547b0e-6fa5-4214-82d7-cda5f1e07e46">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_UNITS_RESPOND_CODE_2.wav" Name="UNITS_RESPOND_CODE_2.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\UNITS_RESPOND_CODE_2.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_UNITS_RESPOND_CODE_3.wav" Guid="32c6a4fb-a9a5-4181-ab18-061dc85b5f1c">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_UNITS_RESPOND_CODE_3.wav" Name="UNITS_RESPOND_CODE_3.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\UNITS_RESPOND_CODE_3.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_WE_ARE_CODE_4.wav" Guid="c49f74e8-45b6-4e85-86c0-98c6c7dd9988">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_WE_ARE_CODE_4.wav" Name="WE_ARE_CODE_4.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\WE_ARE_CODE_4.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_WE_ARE_CODE_4A.wav" Guid="ea464242-876c-411e-afc3-ece5b089852d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_RESPONSE_TYPES_WE_ARE_CODE_4A.wav" Name="WE_ARE_CODE_4A.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\WE_ARE_CODE_4A.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioUNIT_TYPE_files" Directory="AudioUNIT_TYPE">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ADAM.wav" Guid="0f9315e3-d1b5-4e6e-8bf8-4717933df855">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ADAM.wav" Name="ADAM.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ADAM.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_BOY.wav" Guid="51d72b96-9228-4a53-91ec-149215811e17">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_BOY.wav" Name="BOY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\BOY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_CHARLES.wav" Guid="675c57a4-3861-4ead-b07c-91a39b7b1507">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_CHARLES.wav" Name="CHARLES.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\CHARLES.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_DAVID.wav" Guid="a9e0b34e-213c-4cd1-82cf-5fb5f3793130">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_DAVID.wav" Name="DAVID.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\DAVID.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_EDWARD.wav" Guid="cc978cbd-50f1-4379-8c7b-8bb2a8a835ff">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_EDWARD.wav" Name="EDWARD.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\EDWARD.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_FRANK.wav" Guid="343ae9cf-1222-4679-a42f-b725eeed7326">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_FRANK.wav" Name="FRANK.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\FRANK.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_GEORGE.wav" Guid="a6e2ee5c-f45a-4f6b-9215-d9b0991dbe06">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_GEORGE.wav" Name="GEORGE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\GEORGE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_HENRY.wav" Guid="bbf99656-1779-4e2e-bf1b-76b4c7a47a61">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_HENRY.wav" Name="HENRY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\HENRY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_IDA.wav" Guid="5079fbfe-0c33-40ca-995a-8f90ecea33c8">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_IDA.wav" Name="IDA.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\IDA.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_JOHN.wav" Guid="84393bd7-6618-420c-a64b-52d01b6f113b">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_JOHN.wav" Name="JOHN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\JOHN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_KING.wav" Guid="76a73f18-975f-468a-b1d0-5368fad13162">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_KING.wav" Name="KING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\KING.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_LINCOLN.wav" Guid="e4863ce2-5527-4b89-8901-3ed494bb8e6e">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_LINCOLN.wav" Name="LINCOLN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\LINCOLN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_MARY.wav" Guid="781e3103-c16f-4a29-ac4f-79764d5d79de">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_MARY.wav" Name="MARY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\MARY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_NORA.wav" Guid="197739bd-a061-4232-97d3-576c92e4dd64">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_NORA.wav" Name="NORA.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\NORA.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_OCEAN.wav" Guid="679cad86-1d5e-4d2a-acab-64f769fa30a5">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_OCEAN.wav" Name="OCEAN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\OCEAN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_PAUL.wav" Guid="160420f7-85f2-4c1e-a86f-c04f33893b60">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_PAUL.wav" Name="PAUL.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\PAUL.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_QUEEN.wav" Guid="0c53c39f-333d-4929-b118-3356b046f0da">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_QUEEN.wav" Name="QUEEN.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\QUEEN.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ROBERT.wav" Guid="c0409f07-e686-4eda-bab8-0b5cc1fc86bc">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ROBERT.wav" Name="ROBERT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ROBERT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_SAM.wav" Guid="47d34182-ee6a-4ac8-b73f-2bcd6b4e594d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_SAM.wav" Name="SAM.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\SAM.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_TOM.wav" Guid="d71b61b2-e54d-4676-a780-fb3963655842">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_TOM.wav" Name="TOM.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\TOM.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_UNION.wav" Guid="cf303067-2058-468f-b9bd-a7ef58bcda38">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_UNION.wav" Name="UNION.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\UNION.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_VICTOR.wav" Guid="a034a830-2879-49f9-9ba3-ca2ac8651f85">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_VICTOR.wav" Name="VICTOR.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\VICTOR.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_WILLIAM.wav" Guid="23699281-d9cd-4beb-a867-eb479dc19958">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_WILLIAM.wav" Name="WILLIAM.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\WILLIAM.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_XRAY.wav" Guid="8da52268-e773-43bc-96e6-bf8db483334d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_XRAY.wav" Name="XRAY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\XRAY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_YOUNG.wav" Guid="bee1a600-f01f-4964-b9dd-e42adc87949c">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_YOUNG.wav" Name="YOUNG.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\YOUNG.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ZEBRA.wav" Guid="0a79115a-f0af-420b-b21f-1afa8912127d">
+        <File Id="Police_Scanner_Code_3_Audio_DISPATCH_UNIT_TYPE_ZEBRA.wav" Name="ZEBRA.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ZEBRA.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioAI_UNIT_RESPONDING_files" Directory="AudioAI_UNIT_RESPONDING">
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_01.wav" Guid="6a5f52bf-133c-443b-ad43-3f746df944ef">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_01.wav" Name="AI_UNIT_RESPONDING_01.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_01.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_02.wav" Guid="4fc1cd2d-76fa-4b97-9503-8693119b0b1e">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_02.wav" Name="AI_UNIT_RESPONDING_02.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_02.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_03.wav" Guid="e91c8e90-0138-427f-9761-71b65c04e0a0">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_03.wav" Name="AI_UNIT_RESPONDING_03.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_03.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_04.wav" Guid="6e988e7b-b917-42fd-a3c6-1222bd0ba261">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_04.wav" Name="AI_UNIT_RESPONDING_04.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_04.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_05.wav" Guid="59855d10-9973-420d-b5a6-fac8ec6359c9">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_05.wav" Name="AI_UNIT_RESPONDING_05.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_05.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_06.wav" Guid="55f8b9f9-9996-45e2-b073-2d55a035316f">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_06.wav" Name="AI_UNIT_RESPONDING_06.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_06.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_07.wav" Guid="20cb8e02-7dd5-476a-a4be-18a85ba86ff5">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_07.wav" Name="AI_UNIT_RESPONDING_07.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_07.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_08.wav" Guid="65e3d637-e457-4224-8de7-8070b79b04c1">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_08.wav" Name="AI_UNIT_RESPONDING_08.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_08.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_09.wav" Guid="e1c79c9e-fda0-4348-ab2e-652e8bb84cb5">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_09.wav" Name="AI_UNIT_RESPONDING_09.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_09.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_10.wav" Guid="0ef6787a-0020-4a6a-b65f-2913a5f705cf">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_10.wav" Name="AI_UNIT_RESPONDING_10.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_10.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_11.wav" Guid="fc8abf9c-af13-4760-bcf0-e2b3f6d90269">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_11.wav" Name="AI_UNIT_RESPONDING_11.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_11.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_12.wav" Guid="66931956-417d-45a1-b255-ee02866df441">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_12.wav" Name="AI_UNIT_RESPONDING_12.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_12.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_13.wav" Guid="70595ca3-4e02-4de0-a463-2d8803a1069f">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_13.wav" Name="AI_UNIT_RESPONDING_13.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_13.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_14.wav" Guid="af04c04e-3125-44a7-b9c1-f262afb80532">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_14.wav" Name="AI_UNIT_RESPONDING_14.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_14.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_15.wav" Guid="2adf6e0a-2cf2-4564-8783-9017247172da">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_15.wav" Name="AI_UNIT_RESPONDING_15.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_15.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_16.wav" Guid="ac04d1d8-e676-4f5e-aee5-f0fe250f6467">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_16.wav" Name="AI_UNIT_RESPONDING_16.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_16.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_17.wav" Guid="22610f43-2fde-434b-a040-35857af4ed0a">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_17.wav" Name="AI_UNIT_RESPONDING_17.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_17.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_18.wav" Guid="a8aec2e3-a646-48ac-b9e8-c8a3c5ba39c4">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_18.wav" Name="AI_UNIT_RESPONDING_18.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_18.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_19.wav" Guid="36aeda96-c87a-4baa-9011-7b4c4573d8c0">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_19.wav" Name="AI_UNIT_RESPONDING_19.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_19.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_20.wav" Guid="8c7f4a58-8d28-47ec-b4af-6ef091192320">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_20.wav" Name="AI_UNIT_RESPONDING_20.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_20.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_21.wav" Guid="66154b24-b4fc-4e4d-9aa6-92e49eaee979">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_21.wav" Name="AI_UNIT_RESPONDING_21.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_21.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_22.wav" Guid="681e90fa-39a5-4dea-a5f6-311c7a328899">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_22.wav" Name="AI_UNIT_RESPONDING_22.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_22.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_23.wav" Guid="62811873-add5-4d6a-b39b-9a926c02411f">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_23.wav" Name="AI_UNIT_RESPONDING_23.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_23.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_24.wav" Guid="7faf015e-139d-4c86-ab0d-43ba7daa4e64">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_24.wav" Name="AI_UNIT_RESPONDING_24.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_24.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_25.wav" Guid="4a3d7117-a53e-4e86-b52c-a68bb60cfd89">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_25.wav" Name="AI_UNIT_RESPONDING_25.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_25.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_26.wav" Guid="fb177237-bd74-45d6-b6f7-2dce06fc6a62">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_26.wav" Name="AI_UNIT_RESPONDING_26.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_26.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_27.wav" Guid="dadaabd7-6266-4ee1-ba1d-c392c0b52b4c">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_27.wav" Name="AI_UNIT_RESPONDING_27.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_27.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_28.wav" Guid="c15bb43d-53e3-4bb4-9095-ea7f76610247">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_28.wav" Name="AI_UNIT_RESPONDING_28.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_28.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_29.wav" Guid="8cd1f88d-2ad4-4bdf-a383-435c5fca7383">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_29.wav" Name="AI_UNIT_RESPONDING_29.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_29.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_30.wav" Guid="d531c868-af03-4ade-833a-7ba743c3cadc">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_30.wav" Name="AI_UNIT_RESPONDING_30.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_30.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_31.wav" Guid="40e0a9b7-cebd-45ea-b1e2-9945f6bba93b">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_31.wav" Name="AI_UNIT_RESPONDING_31.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_31.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_32.wav" Guid="5fc63c70-82f4-4afb-ae10-265293143e34">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_32.wav" Name="AI_UNIT_RESPONDING_32.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_32.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_33.wav" Guid="3bc35343-3bd1-499f-a0ec-49607f920e8d">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_33.wav" Name="AI_UNIT_RESPONDING_33.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_33.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_34.wav" Guid="fde792d2-9a02-4ad6-85a6-af2f9b341858">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_34.wav" Name="AI_UNIT_RESPONDING_34.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_34.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_35.wav" Guid="fcf05be8-4936-4b76-8f7b-95056e3d7f92">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_35.wav" Name="AI_UNIT_RESPONDING_35.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_35.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_36.wav" Guid="a94f8d6c-accb-41c6-9016-dd77a6d5dabb">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_36.wav" Name="AI_UNIT_RESPONDING_36.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_36.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_37.wav" Guid="89025cd9-6a2c-4c02-970d-0f0e1fd431a0">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_37.wav" Name="AI_UNIT_RESPONDING_37.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_37.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_38.wav" Guid="aef20c35-870c-4a7c-ba29-7c6223453ab0">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_38.wav" Name="AI_UNIT_RESPONDING_38.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_38.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_39.wav" Guid="f63aea3f-867e-48fa-bf08-6046345b2654">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_39.wav" Name="AI_UNIT_RESPONDING_39.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_39.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_40.wav" Guid="34ba6c70-529a-4439-af1d-5481019cb2ad">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_40.wav" Name="AI_UNIT_RESPONDING_40.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_40.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_41.wav" Guid="7779d8f5-c4b2-4902-a783-9c2c38e555ac">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_AI_UNIT_RESPONDING_AI_UNIT_RESPONDING_41.wav" Name="AI_UNIT_RESPONDING_41.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_41.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioRESPONDING_files" Directory="AudioRESPONDING">
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_COPY_IN_VICINITY.wav" Guid="291173df-a6db-4eec-806e-c72e472ddd88">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_COPY_IN_VICINITY.wav" Name="COPY_IN_VICINITY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\RESPONDING\COPY_IN_VICINITY.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_HAVE_A_VISUAL.wav" Guid="881b49d3-c94e-489e-acb3-3b12221b20f7">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_HAVE_A_VISUAL.wav" Name="HAVE_A_VISUAL.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\RESPONDING\HAVE_A_VISUAL.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_ROGER_EN_ROUTE.wav" Guid="86140bbe-6e16-422f-aaef-95e5ba81102f">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_ROGER_EN_ROUTE.wav" Name="ROGER_EN_ROUTE.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\RESPONDING\ROGER_EN_ROUTE.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_ROGER_ON_OUR_WAY.wav" Guid="1777732b-9251-4369-b5f2-181a0ebf05b0">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_RESPONDING_ROGER_ON_OUR_WAY.wav" Name="ROGER_ON_OUR_WAY.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\RESPONDING\ROGER_ON_OUR_WAY.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="AudioSUSPECT_SPOTTED_files" Directory="AudioSUSPECT_SPOTTED">
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_GOT_EYES_IN_PURSUIT.wav" Guid="346f054c-9e27-425a-a87b-18c68ce25d8a">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_GOT_EYES_IN_PURSUIT.wav" Name="GOT_EYES_IN_PURSUIT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\GOT_EYES_IN_PURSUIT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_HAVE_A_VISUAL.wav" Guid="6a8a2b5e-84d9-4489-9ff3-2ae6443d4cc9">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_HAVE_A_VISUAL.wav" Name="HAVE_A_VISUAL.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\HAVE_A_VISUAL.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_SUSPECT_IN_SIGHT.wav" Guid="500ecbdd-174b-4791-a4ac-1c4cfecfa828">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_SUSPECT_IN_SIGHT.wav" Name="SUSPECT_IN_SIGHT.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\SUSPECT_IN_SIGHT.wav" />
+      </Component>
+      <Component Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_SUSPECT_LOCATED_ENGAGING.wav" Guid="a8d88eb5-aa08-4167-8ff5-2096961f6834">
+        <File Id="Police_Scanner_Code_3_Audio_OFFICER_SUSPECT_SPOTTED_SUSPECT_LOCATED_ENGAGING.wav" Name="SUSPECT_LOCATED_ENGAGING.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\SUSPECT_LOCATED_ENGAGING.wav" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
