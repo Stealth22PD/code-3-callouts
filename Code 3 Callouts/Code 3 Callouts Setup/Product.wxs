@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define Code 3 Callouts_TargetDir=$(var.Code 3 Callouts.TargetDir)?>
-  <Product Id="*" Name="Code 3 Callouts" Language="1033" Version="1.2.1.0" Manufacturer="Stealth22" UpgradeCode="970d8906-6ebc-446b-8359-bba7fbe3af77">
+  <Product Id="*" Name="Code 3 Callouts" Language="1033" Version="1.3.0.0" Manufacturer="Stealth22" UpgradeCode="970d8906-6ebc-446b-8359-bba7fbe3af77">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -311,7 +311,7 @@
       <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_502.wav" Guid="0e67f2b6-5fe3-4a51-bc53-458bfad56cdb">
         <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_POSSIBLE_502.wav" Name="POSSIBLE_502.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_502.wav" />
       </Component>
-      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PUBLIC_INTOX.wav" Guid="2786c9bd-d291-4297-8eab-f3bdddf5903d">
+      <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_internal_INTOX.wav" Guid="2786c9bd-d291-4297-8eab-f3bdddf5903d">
         <File Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_PUBLIC_INTOX.wav" Name="PUBLIC_INTOX.wav" Source="$(var.Code 3 Callouts_TargetDir)Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PUBLIC_INTOX.wav" />
       </Component>
       <Component Id="Police_Scanner_Code_3_Audio_DISPATCH_CRIMES_SUSPICIOUS_VEHICLE.wav" Guid="2990bf04-0693-429d-b6a9-5c5134f18ed8">

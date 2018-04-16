@@ -1,5 +1,0 @@
-<project baseDir="Code 3 Callouts\bin\x64\Release" outputDir="." xmlns="http://confuser.codeplex.com">
-  <rule pattern="true" preset="normal" inherit="false" />
-  <module path="Stealth.Common.dll" />
-  <module path="Code 3 Callouts.dll" />
-</project>

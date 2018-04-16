@@ -33,6 +33,29 @@
             <param name="control"></param>
             <returns>true if a Rage.GameControl is just released while it's disabled</returns>
         </member>
+        <member name="M:RAGENativeUI.Common.GetPressedKeys">
+            <summary>
+            Gets the current pressed keys.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.ICollection`1"/> with the current pressed keys.</returns>
+        </member>
+        <member name="M:RAGENativeUI.Common.WriteFileFromResources(System.Reflection.Assembly,System.String)">
+            <summary>
+            Save an embedded resource to a temporary file.
+            </summary>
+            <param name="yourAssembly">Your executing assembly.</param>
+            <param name="fullResourceName">Resource name including your solution name. E.G MyMenuMod.banner.png</param>
+            <returns>Absolute path to the written file.</returns>
+        </member>
+        <member name="M:RAGENativeUI.Common.WriteFileFromResources(System.Reflection.Assembly,System.String,System.String)">
+            <summary>
+            Save an embedded resource to a concrete path.
+            </summary>
+            <param name="yourAssembly">Your executing assembly.</param>
+            <param name="fullResourceName">Resource name including your solution name. E.G MyMenuMod.banner.png</param>
+            <param name="savePath">Path to where save the file, including the filename.</param>
+            <returns>Absolute path to the written file.</returns>
+        </member>
         <member name="P:RAGENativeUI.Elements.BarTimerBar.Percentage">
             <summary>
             Bar percentage. Goes from 0 to 1.
@@ -164,6 +187,15 @@
             <param name="texture">Your custom texture object.</param>
             <param name="position"></param>
             <param name="size"></param>
+        </member>
+        <member name="M:RAGENativeUI.Elements.Sprite.DrawTexture(Rage.Texture,System.Drawing.Point,System.Drawing.Size,Rage.Graphics)">
+            <summary>
+            Draws a custom texture from a file on a 1080-pixels height base.
+            </summary>
+            <param name="texture">Your custom texture object.</param>
+            <param name="position"></param>
+            <param name="size"></param>
+            <param name="graphics"></param>
         </member>
         <member name="M:RAGENativeUI.Elements.Sprite.WriteFileFromResources(System.Reflection.Assembly,System.String)">
             <summary>
@@ -320,6 +352,24 @@
             Returns the menu this item is in.
             </summary>
         </member>
+        <member name="P:RAGENativeUI.Elements.UIMenuListItem.Items">
+            <summary>
+            Gets or sets the items from this <see cref="T:RAGENativeUI.Elements.UIMenuListItem"/> instance.
+            </summary>
+            <remarks>
+            For better safety before modifying the items <see cref="T:System.Collections.Generic.List`1"/> set <see cref="P:RAGENativeUI.Elements.UIMenuListItem.Index"/> to 0.
+            </remarks>
+        </member>
+        <member name="F:RAGENativeUI.Elements.UIMenuListItem.ScrollingEnabled">
+            <summary>
+            Enables or disables scrolling through the list by holding the key
+            </summary>
+        </member>
+        <member name="F:RAGENativeUI.Elements.UIMenuListItem.HoldTimeBeforeScroll">
+            <summary>
+            Hold time in milliseconds before scrolling to the next item on list when holding the key [Default = 200]
+            </summary>
+        </member>
         <member name="E:RAGENativeUI.Elements.UIMenuListItem.OnListChanged">
             <summary>
             Triggered when the list is changed.
@@ -465,6 +515,12 @@
             </summary>
             <param name="canvas">Canvas to draw on.</param>
         </member>
+        <member name="M:RAGENativeUI.MenuPool.DrawBanners(Rage.Graphics)">
+            <summary>
+            Draw all of your menus' custom banners.
+            </summary>
+            <param name="g">The <see cref="T:Rage.Graphics"/> to draw on.</param>
+        </member>
         <member name="M:RAGENativeUI.MenuPool.CloseAllMenus">
             <summary>
             Closes all of your menus.
@@ -476,6 +532,12 @@
             </summary>
             <param name="resetLists">If true the index of all lists will be set to 0.</param>
             <param name="resetCheckboxes">If true all the checkboxes will be unchecked.</param>
+        </member>
+        <member name="M:RAGENativeUI.PauseMenu.MissionLogo.#ctor(Rage.Texture)">
+            <summary>
+            Create a logo from an external picture.
+            </summary>
+            <param name="filepath">Path to the picture</param>
         </member>
         <member name="M:RAGENativeUI.PauseMenu.MissionLogo.#ctor(System.String,System.String)">
             <summary>
@@ -629,6 +691,15 @@
             </summary>
             <param name="e">Rage.GraphicsEventArgs to draw on.</param>
         </member>
+        <member name="M:RAGENativeUI.UIMenu.DrawBanner(Rage.Graphics)">
+            <summary>
+            Draw your custom banner.
+            <para>
+            To prevent flickering call it inside a <see cref="E:Rage.Game.RawFrameRender"/> event handler.
+            </para>
+            </summary>
+            <param name="g">The <see cref="T:Rage.Graphics"/> to draw on.</param>
+        </member>
         <member name="M:RAGENativeUI.UIMenu.Draw">
             <summary>
             Draw the menu and all of it's components.
@@ -766,7 +837,7 @@
         </member>
         <member name="M:RAGENativeUI.UIMenu.IsControlBeingPressed(RAGENativeUI.Common.MenuControls,System.Windows.Forms.Keys)">
             <summary>
-            Check whether a menucontrol is being pressed.
+            Checks whether a menucontrol is being pressed and if selected item is UIListItem, uses UIListItem variables
             </summary>
             <param name="control"></param>
             <param name="key"></param>
@@ -831,6 +902,17 @@
             <summary>
             String to pre-attach to the counter string. Useful for color codes.
             </summary>
+        </member>
+        <member name="P:RAGENativeUI.UIMenu.CounterOverride">
+            <summary>
+            Gets or sets the text that overrides the counter string.
+            <para>
+            If <c>null</c> the counter string isn't overrided.
+            </para>
+            </summary>
+            <value>
+            The text that overrides the counter string.
+            </value>
         </member>
         <member name="P:RAGENativeUI.UIMenu.ParentMenu">
             <summary>

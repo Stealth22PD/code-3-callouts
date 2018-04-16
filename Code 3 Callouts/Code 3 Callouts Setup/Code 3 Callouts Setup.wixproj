@@ -39,7 +39,7 @@
     <Content Include="Code 3 Callouts Setup.wax" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Code 3 Callouts\Code 3 Callouts.vbproj">
+    <ProjectReference Include="..\Code 3 Callouts\Code 3 Callouts.csproj">
       <Name>Code 3 Callouts</Name>
       <Project>{7b6effcf-9f09-439c-bc68-e95fa6855a4a}</Project>
       <Private>True</Private>

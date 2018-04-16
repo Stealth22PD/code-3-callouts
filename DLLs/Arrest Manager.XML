@@ -4,69 +4,108 @@
         <name>Arrest Manager</name>
     </assembly>
     <members>
-        <member name="M:Arrest_Manager.API.Functions.RequestTransport_ReturnBoolSuccessful">
+        <member name="M:Arrest_Manager.API.Functions.RequestTransport(Rage.Ped)">
             <summary>
-            Request transport for the nearest suspect that has transport on standby. If multiple suspects are available, requests multi transport automatically.
+            Request transport for the specified suspect. Returns a bool indicating whether requesting transport was successful.
             </summary>
-            <returns></returns>
+            <param name="suspect">The ped to be transported. Does not necessarily have to be arrested.</param>
+            <returns>Returns a bool indicating whether requesting transport was successful.</returns>
         </member>
-        <member name="M:Arrest_Manager.API.Functions.RequestTransport_ReturnBoolSuccessful(Rage.Ped,Rage.Vehicle)">
+        <member name="M:Arrest_Manager.API.Functions.RequestTransport">
             <summary>
-            Requests transport for the nearest ped that has transport on standby.
+            Request transport for the nearest suspect that has transport on standby. If multiple suspects are available, requests multi transport automatically. Returns a bool indicating whether requesting transport was successful.
+            </summary>
+            <returns>Returns a bool indicating whether requesting transport was successful.</returns>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestTransport(Rage.Ped,Rage.Vehicle)">
+            <summary>
+            Requests transport for the nearest ped that has transport on standby. Returns a bool indicating whether requesting transport was successful.
             </summary>
             <param name="Cop">Cop to drive the pickup vehicle.</param>
             <param name="PoliceTransportVehicle">Pickup vehicle to be driven by the cop.</param>
-            <returns></returns>
+            <returns>Returns a bool indicating whether requesting transport was successful.</returns>
         </member>
-        <member name="M:Arrest_Manager.API.Functions.RequestTowTruckForNearbyVehicle">
+        <member name="M:Arrest_Manager.API.Functions.RequestTowTruck(Rage.Vehicle,System.Boolean)">
             <summary>
-            Requests tow truck for the nearest valid vehicle.
+            Dispatches a tow truck for the target vehicle.
             </summary>
+            <param name="VehicleToTow">Must not have occupants and be a valid model that can be towed (no planes etc.).</param>
+            <param name="PlayAnims">Determines whether the player performs the radio animation or not.</param>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.RequestTowTruck(System.Boolean)">
+            <summary>
+            Dispatches a tow truck for the nearest valid vehicle.
+            </summary>
+            <param name="PlayAnims">Determines whether the player performs the radio animation or not.</param>
         </member>
         <member name="M:Arrest_Manager.API.Functions.RequestInsurancePickupForNearbyVehicle">
             <summary>
             Requests insurance company pickup for the nearest valid vehicle.
             </summary>
         </member>
-        <member name="M:Arrest_Manager.API.Functions.RequestTowTruckForVehicle(Rage.Vehicle)">
-            <summary>
-            Dispatches a tow truck for the target vehicle.
-            </summary>
-            <param name="VehicleToTow">Must not have occupants and be a valid model that can be towed (no planes etc.).</param>
-        </member>
         <member name="E:Arrest_Manager.API.Functions.PlayerArrestedPed">
             <summary>
             Raised whenever the player arrests a ped. Only raised once per arrested ped.
             </summary>
         </member>
-        <member name="T:Arrest_Manager.Main">
+        <member name="E:Arrest_Manager.API.Functions.PlayerGrabbedPed">
             <summary>
-            Do not rename! Attributes or inheritance based plugins will follow when the API is more in depth.
+            Raised whenever the player grabs a ped.
             </summary>
         </member>
-        <member name="M:Arrest_Manager.Main.#ctor">
+        <member name="M:Arrest_Manager.API.Functions.IsPedGrabbed(Rage.Ped)">
             <summary>
-            Constructor for the main class, same as the class, do not rename.
+            Returns a boolean indicating if the specified ped is grabbed or not.
+            </summary>
+            <param name="ped"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.IsPedGrabbed">
+            <summary>
+            Returns a boolean indicating if any ped is grabbed or not.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Arrest_Manager.API.Functions.ReleaseGrabbedPed">
+            <summary>
+            If a ped is currently grabbed, releases it.
             </summary>
         </member>
-        <member name="M:Arrest_Manager.Main.Finally">
+        <member name="M:Arrest_Manager.API.Functions.ArrestPed(Rage.Ped)">
             <summary>
-            Called when the plugin ends or is terminated to cleanup
+            Arrests the ped as would happen using the Ped Management menu. Must use Grab feature to move the ped around and place in vehicle.
             </summary>
+            <param name="suspect">The ped to be arrested.</param>
         </member>
-        <member name="M:Arrest_Manager.Main.Initialize">
+        <member name="M:Arrest_Manager.API.SmartRadioFuncs.AddActionToButton(System.Action,System.String)">
             <summary>
-            Called when the plugin is first loaded by LSPDFR
+            Adds an Action and an availability check to the specified button. Only buttons contained in a folder matching your plugin's name can be manipulated.
             </summary>
+            <param name="action">The action to execute if the button is selected.</param>
+            <param name="buttonName">The texture file name of the button, excluding any directories or file extensions.</param>
+            <returns></returns>
         </member>
-        <member name="M:Arrest_Manager.Main.startup">
+        <member name="M:Arrest_Manager.API.SmartRadioFuncs.AddActionToButton(System.Action,System.Func{System.Boolean},System.String)">
             <summary>
-             Launches our plugin. If it encounters an error, log it and restart.
+            Adds an Action and an availability check to the specified button. Only buttons contained in a folder matching your plugin's name can be manipulated.
             </summary>
+            <param name="action">The action to execute if the button is selected.</param>
+            <param name="isAvailable">Function returning a bool indicating whether the button is currently available (if false, button is hidden). This is often called, so try making this light-weight (e.g. simply return the value of a boolean property). Make sure to do proper checking in your Action too, as the user can forcefully display all buttons via a setting in their config file.</param>
+            <param name="buttonName">The texture file name of the button, excluding any directories or file extensions.</param>
+            <returns></returns>
         </member>
-        <member name="M:Arrest_Manager.Main.Functions_OnOnDutyStateChanged(System.Boolean)">
+        <member name="M:Arrest_Manager.API.SmartRadioFuncs.AddButtonSelectedHandler(System.Action)">
             <summary>
-            The event handler mentioned above,
+            Raised whenever the player selects a button on the SmartRadio.
+            </summary>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Arrest_Manager.API.VocalDispatchHelper.MiddleManEventHandler">
+            <summary>
+            This function will be called directly by VocalDispatch.
+            It then calls the function you specify in SetupVocalDispatchAPI.
+            The function you specify has no knowledge of VocalDispatch and can therefore exist safely in your code.
+            This function cannot exist safely in other classes and must be hidden away here, instead, to provide a safe middleman between VocalDispatch and your code.
             </summary>
         </member>
     </members>

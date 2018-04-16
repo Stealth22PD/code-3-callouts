@@ -1,0 +1,736 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B6EFFCF-9F09-439C-BC68-E95FA6855A4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Stealth.Plugins.Code3Callouts</RootNamespace>
+    <AssemblyName>Code 3 Callouts</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,1590,1591</NoWarn>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AssemblyInfoFilePath>My%2520Project\AssemblyInfo.cs</AssemblyInfoFilePath>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>True</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.IncrementOnDemandWithReset.Increment</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.IncrementOnDemandWithReset.Increment</AssemblyFileVersionSettings>
+    <AssemblyInfoVersionSettings>None.None.IncrementOnDemandWithReset.Increment</AssemblyInfoVersionSettings>
+    <PrimaryVersionType>AssemblyVersionAttribute</PrimaryVersionType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'QA|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Beta\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,1590,1591</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'QA|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Beta\</OutputPath>
+    <DocumentationFile>Code 3 Callouts.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>BETA</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Arrest Manager">
+      <HintPath>..\..\DLLs\Arrest Manager.dll</HintPath>
+    </Reference>
+    <Reference Include="ComputerPlus">
+      <HintPath>..\..\DLLs\ComputerPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="LSPD First Response">
+      <HintPath>..\..\DLLs\LSPD First Response.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RAGENativeUI">
+      <HintPath>..\..\DLLs\RAGENativeUI.dll</HintPath>
+    </Reference>
+    <Reference Include="RagePluginHookSDK">
+      <HintPath>..\..\DLLs\RagePluginHookSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Stealth.Common">
+      <HintPath>..\..\DLLs\Stealth.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Traffic Policer">
+      <HintPath>..\..\DLLs\Traffic Policer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Models\Ambient\AmbientBase.cs" />
+    <Compile Include="Models\Ambient\Event Types\Carjacking.cs" />
+    <Compile Include="Models\Ambient\Event Types\FightInProgress.cs" />
+    <Compile Include="Models\Ambient\Event Types\Mugging.cs" />
+    <Compile Include="Models\Ambient\Event Types\StolenVehicle.cs" />
+    <Compile Include="Models\Ambient\IAmbientBase.cs" />
+    <Compile Include="Models\Callouts\Callout Types\Assault.cs" />
+    <Compile Include="Models\Callouts\Callout Types\BackupDomestic.cs" />
+    <Compile Include="Models\Callouts\Callout Types\Burglary.cs" />
+    <Compile Include="Models\Callouts\Callout Types\HitAndRun.cs" />
+    <Compile Include="Models\Callouts\Callout Types\IntoxicatedPerson.cs" />
+    <Compile Include="Models\Callouts\Callout Types\PersonWithWeapon.cs" />
+    <Compile Include="Models\Callouts\Callout Types\ImpairedDriver.cs" />
+    <Compile Include="Models\Callouts\Callout Types\PoliceImpersonator.cs" />
+    <Compile Include="Models\Callouts\Callout Types\RoadRage.cs" />
+    <Compile Include="Models\Callouts\CalloutBase.cs" />
+    <Compile Include="Models\Callouts\Callout Types\UnknownTrouble.cs" />
+    <Compile Include="Models\Callouts\ICalloutBase.cs" />
+    <Compile Include="Models\Interiors\InteriorDatabase.cs" />
+    <Compile Include="Models\Interiors\Interior.cs" />
+    <Compile Include="Models\Interiors\Residence.cs" />
+    <Compile Include="Models\IPoliceIncident.cs" />
+    <Compile Include="Models\Peds\Cop.cs" />
+    <Compile Include="Models\Peds\IPedBase.cs" />
+    <Compile Include="Models\Peds\PedBase.cs" />
+    <Compile Include="Models\Peds\PedHelper.cs" />
+    <Compile Include="Models\Peds\Suspect.cs" />
+    <Compile Include="Models\Peds\Victim.cs" />
+    <Compile Include="Models\Peds\Witness.cs" />
+    <Compile Include="Models\Vehicles\IVehicle.cs" />
+    <Compile Include="Models\Vehicles\Vehicle.cs" />
+    <Compile Include="Models\Vehicles\VehicleHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Audio\AudioDatabase.cs" />
+    <Compile Include="Util\Audio\AudioPlayerEngine.cs" />
+    <Compile Include="Util\ComputerPlusFunctions.cs" />
+    <Compile Include="Util\Extensions\EnumExtensions.cs" />
+    <Compile Include="Util\Extensions\PedExtensions.cs" />
+    <Compile Include="Util\Logger.cs" />
+    <Compile Include="Util\Radio.cs" />
+    <Compile Include="Util\TrafficPolicerFunctions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\DISPATCH_CALLING_UNIT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\ASSAULT_ON_A_CIVILIAN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\A_DUI.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CARJACKING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_187.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_459.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_502.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\DRIVER_UNDER_INFLUENCE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\HOMICIDE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\MOTOR_VEHICLE_ACCIDENT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\MUGGING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\OFFICER_IN_NEED_OF_ASSISTANCE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PERSON_STEALING_A_CAR.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_459.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_502.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LAPD_Radio_Codes_For_Reference.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_EASTBOUND.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_NORTHBOUND.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_SOUTHBOUND.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_WESTBOUND.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIRECTIONS\DIR_HEADING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\BOY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\CHARLES.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\DAVID.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\EDWARD.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\FRANK.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\GEORGE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\HENRY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\IDA.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\JOHN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\KING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\MARY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\NORA.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\OCEAN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\PAUL.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\QUEEN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ROBERT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\SAM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\TOM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\UNION.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\VICTOR.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\WILLIAM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\XRAY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\YOUNG.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ZEBRA.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_01.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_02.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_03.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_04.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_05.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_06.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_07.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_08.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_09.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_10.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_11.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_12.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_13.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_14.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_15.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_16.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_17.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_18.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_19.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_20.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_21.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_22.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_23.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_24.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_25.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_26.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_27.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_28.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_29.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_30.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_31.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_32.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_33.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_34.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_35.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_36.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_37.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_38.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_39.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_40.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\AI_UNIT_RESPONDING\AI_UNIT_RESPONDING_41.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Code 3 Callouts Documentation.docx" />
+    <Content Include="Code 3 Callouts Documentation.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code 3 Callouts.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Code3Callouts.crproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\ATTENTION_ALL_UNITS.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\SUSPECT_IN_CUSTODY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_01.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_10.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_11.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_12.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_13.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_14.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_15.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_16.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_17.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_18.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_19.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_02.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_20.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_21.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_22.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_23.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_24.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_03.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_04.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_05.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_06.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_07.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_08.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\BEAT\BEAT_09.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\ASSAULT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CIV_ASSISTANCE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_211.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_240.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_390.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_417.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_480.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\CODE_484.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\HIT_AND_RUN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\OFFICER_NOT_RESPONDING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PERSON_WITH_FIREARM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_211.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_390.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\POSSIBLE_480.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\PUBLIC_INTOX.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\CRIMES\SUSPICIOUS_VEHICLE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_01.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_10.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_02.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_03.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_04.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_05.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_06.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_07.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_08.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\DIVISION\DIV_09.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\GENERIC\DISPATCH_INTRO_02.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\GENERIC\OUTRO_03.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORTING\CITIZENS_REPORT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORTING\OFFICERS_REPORT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\ROGER.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\ROGER_THAT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\TEN_FOUR.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORT_RESPONSE\TEN_FOUR_COPY_THAT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\ALL_UNITS_RESPOND_CODE_99_EMERGENCY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\CODE_99_ALL_UNITS_RESPOND.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\NO_FURTHER_UNITS_REQUIRED.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\RESPOND_CODE_2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\RESPOND_CODE_3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\UNITS_RESPOND_CODE_2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\UNITS_RESPOND_CODE_3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORTING\UNITS_REPORTING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORTING\WEVE_GOT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\REPORTING\WE_HAVE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\WE_ARE_CODE_4.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\RESPONSE_TYPES\WE_ARE_CODE_4A.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\ADAM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\DISPATCH\UNIT_TYPE\LINCOLN.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\RESPONDING\HAVE_A_VISUAL.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\GOT_EYES_IN_PURSUIT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\HAVE_A_VISUAL.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\RESPONDING\COPY_IN_VICINITY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\RESPONDING\ROGER_EN_ROUTE.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\RESPONDING\ROGER_ON_OUR_WAY.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\SUSPECT_IN_SIGHT.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Police Scanner\Code 3 Audio\OFFICER\SUSPECT_SPOTTED\SUSPECT_LOCATED_ENGAGING.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Debug" goto :exit
+if "$(ConfigurationName)" == "QA" goto :release
+if "$(ConfigurationName)" == "Release" goto :release
+
+:release
+copy "$(TargetDir)RagePluginHookSDK.dll" "$(TargetDir)RagePluginHook.dll"
+"$(SolutionDir)packages\ConfuserEx.0.5.0\tools\Confuser.CLI.exe" "$(TargetDir)Code3Callouts.crproj"
+
+:exit</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
