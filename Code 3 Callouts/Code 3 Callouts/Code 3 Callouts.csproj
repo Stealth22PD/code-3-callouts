@@ -463,7 +463,6 @@
     <Content Include="Code3Callouts.crproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -716,33 +715,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM PeterUs lazy copy to output script
-
-if "$(ProjectDir)" == "C:\Users\Peter\OneDrive\LSPDFR\Devel\Stealth\code-3-callouts\Code 3 Callouts\Code 3 Callouts\" (
-  copy /Y "$(TargetPath)" "D:\SteamLibrary\SteamApps\common\Grand Theft Auto V\plugins\LSPDFR"
-)
-
-REM end PeterUs lazy copy to output script
-
-if "$(ConfigurationName)" == "Debug" goto :exit
-
-
-if "$(ConfigurationName)" == "QA" goto :release
-
-
-if "$(ConfigurationName)" == "Release" goto :release
-
-
-:release
-
-copy "$(TargetDir)RagePluginHookSDK.dll" "$(TargetDir)RagePluginHook.dll"
-
-
-"$(SolutionDir)packages\ConfuserEx.0.5.0\tools\Confuser.CLI.exe" "$(TargetDir)Code3Callouts.crproj"
-
-
-
-:exit</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
