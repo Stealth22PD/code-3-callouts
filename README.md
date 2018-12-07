@@ -16,4 +16,5 @@ Enjoy!
 ## Dependencies
 * [LSPD First Response by G17 Media](https://www.lcpdfr.com/files/file/7792-lspd-first-response/)
 * [RAGEPluginHook SDK by MulleDK19](http://ragepluginhook.net/Downloads.aspx)
+* Stealth.Common - My own personal helper library for my LSPDFR projects, which can be found in my GitHub profile
 * .NET Framework + Visual Studio, etc etc
