@@ -205,7 +205,7 @@ namespace Stealth.Plugins.Code3Callouts
 
         internal static void CheckForUpdates()
         {
-            Stealth.Common.Functions.UpdateFuncs.CheckForUpdates(Constants.LCPDFRDownloadID, Common.Version, Common.VersionInfo.ProductName, true); // no isBeta function in Stealth.Common
+            Stealth.Common.Functions.UpdateFuncs.CheckForUpdates(Constants.LCPDFRDownloadID, Common.Version, Common.VersionInfo.ProductName, true);
         }
 
         internal static bool PreloadChecks()

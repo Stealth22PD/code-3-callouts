@@ -49,24 +49,26 @@ namespace Stealth.Plugins.Code3Callouts
             {
                 Logger.LogTrivial("This is a beta build; authenticating beta key...");
 
-                System.Threading.Tasks.Task.Run(async () =>
-                {
-                    string fileSecretUUID = "7b42cf6a-cbe3-4dba-99eb-938ceedb7918";
+                // Beta funcs missing from my version of Stealth.Common??
 
-                    bool isBetaKeyValid = await BetaFuncs.IsValidKey(Constants.LCPDFRDownloadID, fileSecretUUID, Config.BetaKey);
+                //System.Threading.Tasks.Task.Run(async () =>
+                //{
+                //    string fileSecretUUID = "7b42cf6a-cbe3-4dba-99eb-938ceedb7918";
 
-                    if (!isBetaKeyValid)
-                    {
-                        Logger.LogTrivial("ERROR: Beta key authorization failed!");
-                        GameFuncs.DisplayNotification(Common.VersionInfo.ProductName, "BETA KEY CHECK", "~r~AUTHENTICATION FAILED!");
-                        return;
-                    }
-                    else
-                    {
-                        Logger.LogTrivial("Beta key authorization succeeded!");
-                        StartPlugin(onDuty);
-                    }
-                });
+                //    bool isBetaKeyValid = await BetaFuncs.IsValidKey(Constants.LCPDFRDownloadID, fileSecretUUID, Config.BetaKey);
+
+                //    if (!isBetaKeyValid)
+                //    {
+                //        Logger.LogTrivial("ERROR: Beta key authorization failed!");
+                //        GameFuncs.DisplayNotification(Common.VersionInfo.ProductName, "BETA KEY CHECK", "~r~AUTHENTICATION FAILED!");
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        Logger.LogTrivial("Beta key authorization succeeded!");
+                //        StartPlugin(onDuty);
+                //    }
+                //});
             }
             else if (!Common.IsBeta && onDuty)
             {

@@ -15,7 +15,9 @@ namespace Stealth.Plugins.Code3Callouts.Models.Vehicles
 
 		internal static void SetVehicleColors(Rage.Vehicle v, int pPrimColor, int pSecColor)
 		{
-			Functions.CallByName("SET_VEHICLE_COLOURS", pPrimColor, pSecColor);
+            Stealth.Common.Natives.Vehicles.SetVehicleColors(v,
+                new VehicleColor((Stealth.Common.Natives.Vehicles.EPaint)pPrimColor, (Stealth.Common.Natives.Vehicles.EPaint)pSecColor)
+                );
 		}
 
 	}
