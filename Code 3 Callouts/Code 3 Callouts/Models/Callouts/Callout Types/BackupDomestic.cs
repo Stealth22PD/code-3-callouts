@@ -699,16 +699,15 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 					if (pAddVictim != null && pAddVictim.Exists()) {
 			    			LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(pursuit, pVictim);
 					}
+
+					GameFiber.Sleep(1000);
+					LSPD_First_Response.Mod.API.Functions.AddCopToPursuit(pursuit, pCop1);
+					LSPD_First_Response.Mod.API.Functions.AddCopToPursuit(pursuit, pCop2);
 				} catch (Exception ex) {
 					End();
 					Game.DisplayNotification("Crashed!");
 					Logger.LogVerbose(ex.ToString());
 				}
-			}
-
-				GameFiber.Sleep(1000);
-				LSPD_First_Response.Mod.API.Functions.AddCopToPursuit(pursuit, pCop1);
-				LSPD_First_Response.Mod.API.Functions.AddCopToPursuit(pursuit, pCop2);
 			});
 		}
 
