@@ -103,7 +103,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes
                                             {
                                                 mState = EState.VehicleStolen;
                                                 mVehicle.IsStolen = true;
-                                                Stealth.Common.Natives.Functions.CallByHash(0xb8ff7ab45305c345uL, Common.GetNativeArgument(mVehicle));
+                                                Rage.Native.NativeFunction.Natives.StartVehicleAlarm(mVehicle);
                                                 p1.Tasks.CruiseWithVehicle(mVehicle, 15, (VehicleDrivingFlags.DriveAroundVehicles | VehicleDrivingFlags.DriveAroundPeds | VehicleDrivingFlags.DriveAroundObjects));
                                                 Dispatch911Call(p1.Position);
                                             }
