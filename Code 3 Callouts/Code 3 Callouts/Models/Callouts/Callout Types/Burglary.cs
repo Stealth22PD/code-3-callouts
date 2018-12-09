@@ -573,10 +573,12 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 		private void MakeCopsAimWeapons()
 		{
 			if (pCop1.Exists()) {
+                pCop1.Inventory.EquippedWeapon = pCop1.Inventory.Weapons.FirstOrDefault();
 				pCop1.Tasks.PlayAnimation("combat@chg_positionpose_b", "aimb_calm_fwd", 1f, AnimationFlags.SecondaryTask | AnimationFlags.UpperBodyOnly | AnimationFlags.StayInEndFrame);
 			}
 
 			if (pCop2.Exists()) {
+                pCop2.Inventory.EquippedWeapon = pCop2.Inventory.Weapons.FirstOrDefault();
 				pCop2.Tasks.PlayAnimation("combat@chg_positionpose_b", "aimb_calm_fwd", 1f, AnimationFlags.SecondaryTask | AnimationFlags.UpperBodyOnly | AnimationFlags.StayInEndFrame);
 			}
 		}
@@ -696,10 +698,12 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 					uint mRoomCop1 = 0;
 					uint mRoomCop2 = 0;
 
-					if (pCop1.Exists())
-						mRoomCop1 = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(pCop1));
-					if (pCop2.Exists())
-						mRoomCop2 = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(pCop2));
+                    if (pCop1.Exists())
+                        //mRoomCop1 = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(pCop1));
+                        mRoomCop1 = NativeFunction.Natives.GetRoomKeyFromEntity(pCop1);
+                    if (pCop2.Exists())
+                        //mRoomCop2 = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(pCop2));
+                        mRoomCop2 = NativeFunction.Natives.GetRoomKeyFromEntity(pCop2);
 
 					if (mRoomPlayer == mRoomSuspect) {
 						MakeSuspectReact();
