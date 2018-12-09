@@ -268,8 +268,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Peds
         public void TurnToFaceEntity(Entity pTarget, int pTimeout = 5000)
 		{
 			try {
-				ulong pHash = 0x5ad23d40115353acuL;
-				Rage.Native.NativeFunction.CallByHash<uint>(pHash, Common.GetNativeArgument(this), Common.GetNativeArgument(pTarget), pTimeout);
+                Rage.Native.NativeFunction.Natives.TaskTurnPedToFaceEntity((Ped)this, pTarget, pTimeout);
 			} catch (Exception ex) {
 				Logger.LogVerboseDebug("Error calling native -- " + ex.Message);
 			}

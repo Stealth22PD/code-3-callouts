@@ -31,10 +31,10 @@ namespace Stealth.Plugins.Code3Callouts.Models.Interiors
 		internal void LoadInterior()
 		{
 			if (InteriorSpawnPoint != SpawnPoint.Zero) {
-				int mInterior = NativeFunction.CallByName<int>("GET_INTERIOR_AT_COORDS", InteriorSpawnPoint.Position.X, InteriorSpawnPoint.Position.Y, InteriorSpawnPoint.Position.Z);
-				NativeFunction.CallByHash<uint>(0x2ca429c029ccf247uL, mInterior);
-				NativeFunction.CallByName<uint>("SET_INTERIOR_ACTIVE", mInterior, true);
-				NativeFunction.CallByName<uint>("DISABLE_INTERIOR", mInterior, false);
+				int mInterior = NativeFunction.Natives.GetInteriorAtCoords<int>(InteriorSpawnPoint.Position.X, InteriorSpawnPoint.Position.Y, InteriorSpawnPoint.Position.Z);
+                NativeFunction.Natives.x2ca429c029ccf247(mInterior); // _LOAD_INTERIOR
+                NativeFunction.Natives.SetInteriorActive(mInterior, true);
+                NativeFunction.Natives.DisableInterior(mInterior, false);
 			}
 		}
 

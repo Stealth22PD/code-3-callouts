@@ -693,8 +693,8 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 		{
 			if (mIsPlayerindoors == true && mSuspectReacted == false) {
 				try {
-					uint mRoomSuspect = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(pSuspect));
-					uint mRoomPlayer = NativeFunction.CallByHash<uint>(0x47c2a06d4f5f424buL, Common.GetNativeArgument(Game.LocalPlayer.Character));
+                    uint mRoomSuspect = NativeFunction.Natives.GetRoomKeyFromEntity(pSuspect);
+                    uint mRoomPlayer = NativeFunction.Natives.GetRoomKeyFromEntity(Game.LocalPlayer.Character);
 					uint mRoomCop1 = 0;
 					uint mRoomCop2 = 0;
 

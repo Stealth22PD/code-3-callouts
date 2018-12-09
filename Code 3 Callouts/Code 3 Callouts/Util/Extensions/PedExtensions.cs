@@ -41,8 +41,9 @@ namespace Stealth.Plugins.Code3Callouts.Util.Extensions
 		static internal void AimGunAtCoords(this Ped p, float x, float y, float z, int time)
 		{
 			if (p.Exists())
-				NativeFunction.CallByHash<uint>(0x6671f3eec681bda1uL, Common.GetNativeArgument(p), x, y, z, time, true, true);
-		}
+			    NativeFunction.Natives.TaskAimGunAtCoord(p, x, y, z, time, true, true);
+
+        }
 
 	}
 

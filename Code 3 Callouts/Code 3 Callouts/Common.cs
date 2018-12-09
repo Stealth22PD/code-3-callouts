@@ -359,7 +359,7 @@ namespace Stealth.Plugins.Code3Callouts
 
         internal static bool IsPlayerinLosSantos()
         {
-            uint areaHash = Rage.Native.NativeFunction.CallByName<uint>("GET_HASH_OF_MAP_AREA_AT_COORDS", Game.LocalPlayer.Character.Position.X, Game.LocalPlayer.Character.Position.Y, Game.LocalPlayer.Character.Position.Z);
+            uint areaHash = Rage.Native.NativeFunction.Natives.GetHashOfMapAreaAtCoords<uint>(Game.LocalPlayer.Character.Position.X, Game.LocalPlayer.Character.Position.Y, Game.LocalPlayer.Character.Position.Z);
 
             if (areaHash == Game.GetHashKey("city")) {
                 return true;

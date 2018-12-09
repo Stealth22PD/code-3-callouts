@@ -213,10 +213,8 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 
 					GameFiber.StartNew(() =>
 					{
-						ulong pHash = 0x9c8c6504b5b63d2cuL;
-
 						while (mIsSuspectHonking) {
-							Rage.Native.NativeFunction.CallByHash<ulong>(pHash, GetNativeArgument(vehSuspect), 1000, Game.GetHashKey("HELDDOWN"), 0);
+							Rage.Native.NativeFunction.Natives.StartVehicleHorn(vehSuspect, 1000, Game.GetHashKey("HELDDOWN"), false);
 							GameFiber.Sleep(1500);
 						}
 					});
