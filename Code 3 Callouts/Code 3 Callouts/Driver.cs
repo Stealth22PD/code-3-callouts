@@ -102,8 +102,6 @@ namespace Stealth.Plugins.Code3Callouts
             {
                 int eventFactor = Common.gRandom.Next(1, 100);
 
-                return new StolenVehicle();
-
                 switch (eventFactor)
                 {
                     case 1:
