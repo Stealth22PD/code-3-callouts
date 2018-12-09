@@ -4,5 +4,10 @@
         <name>Code 3 Callouts</name>
     </assembly>
     <members>
+        <member name="F:Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes.StolenVehicle.alarmActiveUntil">
+            <summary>
+            When to set the vehicle alarm state back to false.
+            </summary>
+        </member>
     </members>
 </doc>

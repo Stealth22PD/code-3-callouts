@@ -17,6 +17,11 @@ namespace Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes
 
 		private EState mState = EState.LookingForVehicle;
 
+        /// <summary>
+        /// When to set the vehicle alarm state back to false.
+        /// </summary>
+        private DateTime alarmActiveUntil = DateTime.MinValue;
+
 		private Vehicles.Vehicle mVehicle = null;
 		internal StolenVehicle()
 		{
@@ -103,7 +108,11 @@ namespace Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes
                                             {
                                                 mState = EState.VehicleStolen;
                                                 mVehicle.IsStolen = true;
-                                                Rage.Native.NativeFunction.Natives.StartVehicleAlarm(mVehicle);
+                                                Rage.Native.NativeFunction.Natives.SetVehicleAlarm(mVehicle, true);
+                                                Rage.Native.NativeFunction.Natives.x0B8FF7AB45305C345(mVehicle); // don't know what it is, but seems to trigger alarm in combination with above
+
+                                                alarmActiveUntil = DateTime.Now.AddSeconds(MathHelper.GetRandomInteger(20, 60));
+                                                
                                                 p1.Tasks.CruiseWithVehicle(mVehicle, 15, (VehicleDrivingFlags.DriveAroundVehicles | VehicleDrivingFlags.DriveAroundPeds | VehicleDrivingFlags.DriveAroundObjects));
                                                 Dispatch911Call(p1.Position);
                                             }
@@ -131,8 +140,15 @@ namespace Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes
                             {
                                 if (mVehicle.DistanceTo(Game.LocalPlayer.Character.Position) > 250)
                                 {
+                                    Rage.Native.NativeFunction.Natives.SetVehicleAlarm(mVehicle, false);
                                     End();
                                 }
+
+                                if (Rage.Native.NativeFunction.Natives.IsVehicleAlarmActivated<bool>(mVehicle) && alarmActiveUntil < DateTime.Now)
+                                {
+                                    Rage.Native.NativeFunction.Natives.SetVehicleAlarm(mVehicle, false);
+                                }
+
                             }
                             else
                             {
@@ -160,7 +176,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Ambient.EventTypes
 			List<Rage.Vehicle> mClosestVehicles = GetVehiclesNearPosition(pPosition, pRadius, GetEntitiesFlags.ConsiderCars | GetEntitiesFlags.ExcludeOccupiedVehicles | GetEntitiesFlags.ExcludePlayerVehicle).ToList();
 			Rage.Vehicle mVeh = (from x in mClosestVehicles orderby x.DistanceTo(pPosition) select x).FirstOrDefault();
 
-			if (mVeh != null && mVeh.Exists()) {
+			if (mVeh != null && mVeh.Exists() && !mVeh.IsPoliceVehicle) {
 				return new Vehicles.Vehicle(mVeh.Handle);
 			} else {
 				return null;
