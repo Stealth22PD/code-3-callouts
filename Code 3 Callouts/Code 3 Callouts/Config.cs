@@ -17,6 +17,7 @@ namespace Stealth.Plugins.Code3Callouts
 
         internal static InitializationFile mINIFile = new InitializationFile(INIFilePath);
         internal static string BetaKey { get; set; } = "NULL";
+        internal static bool CheckForUpdates { get; set; }
         internal static bool PlayAdam12intro { get; set; }
         internal static DISPATCH.DIVISION UnitDivision { get; set; }
         internal static DISPATCH.UNIT_TYPE UnitType { get; set; }
@@ -69,6 +70,7 @@ namespace Stealth.Plugins.Code3Callouts
             mINIFile.Create();
 
             //Settings
+            mINIFile.Write(ECfgSections.SETTINGS.ToString(), ESettings.CheckForUpdates.ToString(), true);
             mINIFile.Write(ECfgSections.SETTINGS.ToString(), ESettings.PlayAdam12intro.ToString(), false);
             mINIFile.Write(ECfgSections.SETTINGS.ToString(), ESettings.UnitDivision.ToString(), DISPATCH.DIVISION.DIV_01.ToString());
             mINIFile.Write(ECfgSections.SETTINGS.ToString(), ESettings.UnitType.ToString(), DISPATCH.UNIT_TYPE.ADAM.ToString());
@@ -109,6 +111,7 @@ namespace Stealth.Plugins.Code3Callouts
             //Settings
             BetaKey = mINIFile.ReadString(ECfgSections.SETTINGS.ToString(), "BetaKey", "NULL");
 
+            CheckForUpdates = mINIFile.ReadBoolean(ECfgSections.SETTINGS.ToString(), ESettings.CheckForUpdates.ToString(), true);
             PlayAdam12intro = mINIFile.ReadBoolean(ECfgSections.SETTINGS.ToString(), ESettings.PlayAdam12intro.ToString(), false);
             UnitDivision = mINIFile.ReadEnum<DISPATCH.DIVISION>(ECfgSections.SETTINGS.ToString(), ESettings.UnitDivision.ToString(), DISPATCH.DIVISION.DIV_01);
             UnitType = mINIFile.ReadEnum<DISPATCH.UNIT_TYPE>(ECfgSections.SETTINGS.ToString(), ESettings.UnitType.ToString(), DISPATCH.UNIT_TYPE.ADAM);
@@ -194,6 +197,7 @@ namespace Stealth.Plugins.Code3Callouts
 
         private enum ESettings
         {
+            CheckForUpdates,
             PlayAdam12intro,
             UnitDivision,
             UnitType,
