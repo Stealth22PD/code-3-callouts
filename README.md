@@ -1,4 +1,7 @@
 # Code 3 Callouts
+
+[![Build status](https://ci.appveyor.com/api/projects/status/pi4odpy91qujuhc0?svg=true)](https://ci.appveyor.com/project/Stealth22PD/code-3-callouts)
+
 Code 3 Callouts is my callout pack for LSPDFR.
 
 I have decided to open-source all of my LSPDFR projects, as they have not been touched in a long time. Most of them probably don't work that well anymore, and I simply don't have the time to develop or maintain them any longer.
