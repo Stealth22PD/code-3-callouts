@@ -460,9 +460,6 @@
     <Content Include="Code 3 Callouts.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Code3Callouts.crproj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
