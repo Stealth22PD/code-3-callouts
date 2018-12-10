@@ -692,11 +692,11 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 					pursuit = Common.CreatePursuit();
 					LSPD_First_Response.Mod.API.Functions.SetPursuitIsActiveForPlayer(pursuit, true);
 
-					if (pAddSuspect != null && pAddSuspect.Exists()) {
+					if (pSuspect != null && pSuspect.Exists()) {
 			    			LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(pursuit, pSuspect);
 					}
 
-					if (pAddVictim != null && pAddVictim.Exists()) {
+					if (pVictim != null && pVictim.Exists()) {
 			    			LSPD_First_Response.Mod.API.Functions.AddPedToPursuit(pursuit, pVictim);
 					}
 
