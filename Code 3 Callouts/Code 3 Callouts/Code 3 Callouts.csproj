@@ -105,13 +105,13 @@
       <HintPath>..\..\DLLs\Arrest Manager.dll</HintPath>
     </Reference>
     <Reference Include="BetterEMS">
-      <HintPath>..\..\..\GitHub\code-3-callouts\DLLs\BetterEMS.dll</HintPath>
+      <HintPath>..\..\DLLs\BetterEMS.dll</HintPath>
     </Reference>
     <Reference Include="ComputerPlus">
       <HintPath>..\..\DLLs\ComputerPlus.dll</HintPath>
     </Reference>
     <Reference Include="CustomBackupLocations">
-      <HintPath>..\..\..\GitHub\code-3-callouts\DLLs\CustomBackupLocations.dll</HintPath>
+      <HintPath>..\..\DLLs\CustomBackupLocations.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response">
       <HintPath>..\..\DLLs\LSPD First Response.dll</HintPath>
@@ -469,7 +469,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\ATTENTION_ALL_UNITS.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
