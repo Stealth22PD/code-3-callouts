@@ -104,8 +104,14 @@
     <Reference Include="Arrest Manager">
       <HintPath>..\..\DLLs\Arrest Manager.dll</HintPath>
     </Reference>
+    <Reference Include="BetterEMS">
+      <HintPath>..\..\..\GitHub\code-3-callouts\DLLs\BetterEMS.dll</HintPath>
+    </Reference>
     <Reference Include="ComputerPlus">
       <HintPath>..\..\DLLs\ComputerPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomBackupLocations">
+      <HintPath>..\..\..\GitHub\code-3-callouts\DLLs\CustomBackupLocations.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response">
       <HintPath>..\..\DLLs\LSPD First Response.dll</HintPath>
@@ -184,7 +190,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Audio\AudioDatabase.cs" />
     <Compile Include="Util\Audio\AudioPlayerEngine.cs" />
+    <Compile Include="Util\BetterEMSFunctions.cs" />
     <Compile Include="Util\ComputerPlusFunctions.cs" />
+    <Compile Include="Util\CustomBackupFunctions.cs" />
     <Compile Include="Util\Extensions\EnumExtensions.cs" />
     <Compile Include="Util\Extensions\PedExtensions.cs" />
     <Compile Include="Util\Logger.cs" />

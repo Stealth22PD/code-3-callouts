@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CustomBackupLocations</name>
+    </assembly>
+    <members>
+        <member name="T:CustomBackupLocations.BackupOption">
+            <summary>
+            Defines a backup option for the backup menu
+            </summary>
+        </member>
+        <member name="T:CustomBackupLocations.BackupManager">
+            <summary>
+            Manages custom backup entities. 
+            </summary>
+        </member>
+        <member name="M:CustomBackupLocations.BackupManager.RequestBackup(Rage.Vector3,LSPD_First_Response.EBackupUnitType,System.Int32)">
+            <summary>
+            Returns a custom backup vehicle and peds for the specified location. 
+            If a custom backup entry is present for the specified location, 
+            it will be spawned and the vehicle and peds inside will be returned. 
+            If there is no custom backup entry for this location, it will 
+            return null. This method does <b>not</b> give the backup vehicle
+            or peds any tasks! They will not respond to your location, 
+            they will just be spawned and set as police in the LSPDFR API. 
+            Use this if you're planning to do something with the vehicle in 
+            your own code, such as create a prisoner transport vehicle or 
+            a police vehicle to be placed in a particular scenario. 
+            </summary>
+            <param name="location">The location where backup was requested</param>
+            <param name="type">What type of backup to send</param>
+            <param name="forcenumpeds">Optionally force a specific number of peds. -1 will result in the default number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomBackupLocations.BackupManager.BackupRespond(Rage.Vector3,LSPD_First_Response.EBackupUnitType,LSPD_First_Response.EBackupResponseType)">
+            <summary>
+            Requests a custom backup unit to respond to the specified location. 
+            If a custom backup entry is present for the specified location, 
+            it will be spawned and will respond to the specified coordinates. 
+            If there is no custom entry, the default LSPDFR response will 
+            be used and sent to the same location. You can use this as a direct
+            replacement for Functions.RequestBackup. 
+            </summary>
+            <param name="location">The location where backup should respond to</param>
+            <param name="type">The type of backup requested</param>
+            <param name="response">How the backup should respond</param>
+            <returns></returns>
+        </member>
+        <member name="M:CustomBackupLocations.BackupManager.#ctor">
+            <summary>
+            Loads the CustomBackup.xml file and parses it into BackupEntry objects
+            </summary>
+        </member>
+        <member name="M:CustomBackupLocations.Tools.DependencyChecker.DependencyChecker.AddDependency(CustomBackupLocations.Tools.DependencyChecker.Dependency)">
+            <summary>
+            Adds a dependency to be checked
+            </summary>
+            <param name="dependency"></param>
+        </member>
+        <member name="M:CustomBackupLocations.Tools.DependencyChecker.DependencyChecker.CheckDependencies">
+            <summary>
+            Checks all dependencies added
+            </summary>
+            <returns>True if all match, or if all that don't match allow mis-matches. 
+            Returns false if any dependency is invalid and doesn't allow mismatches.</returns>
+        </member>
+        <member name="M:CustomBackupLocations.Tools.DependencyChecker.DependencyChecker.DisplayDependencyCheck(System.String,System.Boolean)">
+            <summary>
+            Display a notification in-game summarizing dependencies
+            </summary>
+            <param name="pluginname">Name of the main plugin calling the checker. Displayed to the user.</param>
+            <param name="problemOnly">Only show dependencies with issues. No notification shown if no problems.</param>
+        </member>
+    </members>
+</doc>
