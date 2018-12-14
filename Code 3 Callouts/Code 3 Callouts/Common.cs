@@ -388,7 +388,6 @@ namespace Stealth.Plugins.Code3Callouts
             else {
                 if (Common.IsCustomBackupRunning()) {
                     CustomBackupFunctions.RequestBackup(destPoint, unitType, responseType, unitCount);
-                    }
                 }
 
                 else {
@@ -400,7 +399,6 @@ namespace Stealth.Plugins.Code3Callouts
                         for (int loopCount = 0; loopCount < unitCount; loopCount++) {
                             Functions.RequestBackup(destPoint, responseType, unitType);
                         }
-
                     }
                 }
             }
