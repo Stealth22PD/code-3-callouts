@@ -264,9 +264,19 @@ namespace Stealth.Plugins.Code3Callouts
             return isValid;
         }
 
+        static internal bool IsBetterEMSRunning()
+        {
+            return IsLSPDFRPluginRunning("BetterEMS", new Version(3, 0, 0, 0));
+        }
+
         static internal bool IsComputerPlusRunning()
         {
             return IsLSPDFRPluginRunning("ComputerPlus", new Version(1, 3, 3, 0));
+        }
+
+        static internal bool IsCustomBackupRunning()
+        {
+            return IsLSPDFRPluginRunning("CustomBackupLocations", new Version(3, 3, 0, 0)); 
         }
 
         static internal bool IsTrafficPolicerRunning()
@@ -354,9 +364,44 @@ namespace Stealth.Plugins.Code3Callouts
             return mPursuitHandle;
         }
 
-        internal static Rage.Native.NativeArgument GetNativeArgument(Entity pEntity)
+        internal static void RequestBackupToLocation(Vector3 destPoint, LSPD_First_Response.EBackupResponseType responseType, LSPD_First_Response.EBackupUnitType unitType, int unitCount = 1)
         {
-            return new Rage.Native.NativeArgument((IHandleable)pEntity);
+            if(unitType == LSPD_First_Response.EBackupUnitType.Ambulance) {
+                if (Common.IsBetterEMSRunning()) {
+                    BetterEMSFunctions.RequestBackup(destPoint, unitCount);
+                }
+
+                else {
+                    if (unitCount == 1) {
+                        Functions.RequestBackup(destPoint, responseType, unitType);
+                    }
+
+                    else {
+                        for (int loopCount = 0; loopCount < unitCount; loopCount++) {
+                            Functions.RequestBackup(destPoint, responseType, unitType);
+                        }
+
+                    }
+                }
+            }
+
+            else {
+                if (Common.IsCustomBackupRunning()) {
+                    CustomBackupFunctions.RequestBackup(destPoint, unitType, responseType, unitCount);
+                }
+
+                else {
+                    if (unitCount == 1) {
+                        Functions.RequestBackup(destPoint, responseType, unitType);
+                    }
+
+                    else {
+                        for (int loopCount = 0; loopCount < unitCount; loopCount++) {
+                            Functions.RequestBackup(destPoint, responseType, unitType);
+                        }
+                    }
+                }
+            }
         }
 
         internal static bool IsPlayerinLosSantos()

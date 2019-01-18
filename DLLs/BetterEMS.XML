@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BetterEMS</name>
+    </assembly>
+    <members>
+        <member name="M:BetterEMS.API.EMSFunctions.RespondToLocation(Rage.Vector3)">
+            <summary>
+            Requests EMS to respond to the specified location. 
+            All EMS AI is completely handled by the plugin. 
+            </summary>
+            <param name="location">Where the EMS units should respond to.</param>
+            <returns>True if EMS is responding, False if EMS is unable 
+            to respond due to a configuration error within the mod.</returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.RespondToLocation(Rage.Vector3,System.Nullable{System.Boolean})">
+            <summary>
+            Requests EMS to respond to the specified location. 
+            All EMS AI is completely handled by the plugin. 
+            </summary>
+            <param name="location">Where the EMS units should respond to.</param>
+            <param name="sendFirstResponder">If true or false, will force a first responder 
+            (typically fire engine) to respond/never respond. If null, will allow the 
+            user's settings to choose whether a first responder should be dispatched. 
+            You should usually use RespondToLocation(Vector3) and allow the user's settings 
+            to determine whether they want a first responder dispatched.</param>
+            <returns>True if EMS is responding, False if EMS is unable 
+            to respond due to a configuration error within the mod.</returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.RespondToLocation(Rage.Vector3,System.Nullable{System.Boolean},System.String,System.Collections.Generic.Queue{Rage.Vector3})">
+            <summary>
+            Requests EMS to respond to the specified location. 
+            All EMS AI is completely handled by the plugin. 
+            </summary>
+            <param name="location">Where the EMS units should respond to.</param>
+            <param name="sendFirstResponder">If true or false, will force a first responder 
+            (typically fire engine) to respond/never respond. If null, will allow the 
+            user's settings to choose whether a first responder should be dispatched. 
+            You should usually use RespondToLocation(Vector3) and allow the user's settings 
+            to determine whether they want a first responder dispatched.</param>
+            /// <param name="notificationTextOverride">If specified overrides the "EMS is responding 
+            to your location" text with text of your choosing.</param>
+            <param name="overrideResponseRoute">A queue of Vector3 points that both response 
+            vehicles will drive to before driving to the response location. Will drive to the first 
+            location in the queue first. Will always drive to location last - you do not need to 
+            add the final location to the queue.</param>
+            <returns>True if EMS is responding, False if EMS is unable 
+            to respond due to a configuration error within the mod.</returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.PickUpPatient(Rage.Ped,Rage.Vector3)">
+            <summary>
+            Sends an ambulance from the nearest hospital defined in the user's
+            EMSMod.xml file, to pick up the specified ped. The ped will be 
+            placed in the back of the ambulance and driven to the nearest hospital.
+            <b>Must</b> be called from within a GameFiber!
+            </summary>
+            <param name="ped">The ped to transport</param>
+            <param name="location">Location for ambulance to drive to</param>
+            <returns>False if there is a problem spawning the ambulance and medics, otherwise True.</returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.PickUpPatient(Rage.Ped)">
+            <summary>
+            Sends an ambulance from the nearest hospital defined in the user's
+            EMSMod.xml file, to pick up the specified ped. The ped will be 
+            placed in the back of the ambulance and driven to the nearest hospital.
+            <b>Must</b> be called from within a GameFiber!
+            </summary>
+            <param name="ped">The ped to transport</param>
+            <returns></returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.OverridePedDeathDetails(Rage.Ped,System.String,System.String,System.UInt32,System.Single)">
+            <summary>
+            Overrides the death details for the specified ped. Allows you to 
+            force a ped to survive or not survive, and allows you to specify
+            the information that will be displayed in the incident report 
+            after EMS attempts to treat the victim. 
+            
+            The string parameters can be any valid string, and will be displayed
+            to the user as-is. 
+            </summary>
+            <param name="ped">The ped to override</param>
+            <param name="injuredBoneName">Name of the body part injured</param>
+            <param name="causeText">The cause of the injury</param>
+            <param name="gameTimeOfDeath">What time the death occurred in game time. 
+            Use Game.GameTime to get the current game time.</param>
+            <param name="probabilityOfSurvival">A float between 0 and 1 determining how 
+            likely the ped is to survive. Set to 0 to force the ped to never revive, 
+            and set to 1 to force the ped to always be revived.</param>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.ResetPedDeathDetailsToDefault(Rage.Ped)">
+            <summary>
+            If the death details for the specified ped have been overridden 
+            using OverridePedDeathDetails, removes the customization and 
+            reverts to use the default death detail detection behavior. 
+            </summary>
+            <param name="ped">The ped to reset</param>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.GetClonedPedFromOriginal(Rage.Ped)">
+            <summary>
+            Gets the new ped created when EMS clones and deletes a ped being treated
+            </summary>
+            <param name="treatedPed">The original ped that got cloned</param>
+            <returns>The new ped that got created, or null if none is known</returns>
+        </member>
+        <member name="M:BetterEMS.API.EMSFunctions.DidEMSRevivePed(Rage.Ped)">
+            <summary>
+            Checks if a ped has been revived by EMS.
+            </summary>
+            <param name="ped">The ped to check</param>
+            <returns>Null if the ped was never checked by EMS or if treatment is in progress and not complete. 
+            True if the ped was revived successfully, false if the ped was not revived successfully.</returns>
+        </member>
+        <member name="M:BetterEMS.Tools.DependencyChecker.DependencyChecker.AddDependency(BetterEMS.Tools.DependencyChecker.Dependency)">
+            <summary>
+            Adds a dependency to be checked
+            </summary>
+            <param name="dependency"></param>
+        </member>
+        <member name="M:BetterEMS.Tools.DependencyChecker.DependencyChecker.CheckDependencies">
+            <summary>
+            Checks all dependencies added
+            </summary>
+            <returns>True if all match, or if all that don't match allow mis-matches. 
+            Returns false if any dependency is invalid and doesn't allow mismatches.</returns>
+        </member>
+        <member name="M:BetterEMS.Tools.DependencyChecker.DependencyChecker.DisplayDependencyCheck(System.String,System.Boolean)">
+            <summary>
+            Display a notification in-game summarizing dependencies
+            </summary>
+            <param name="pluginname">Name of the main plugin calling the checker. Displayed to the user.</param>
+            <param name="problemOnly">Only show dependencies with issues. No notification shown if no problems.</param>
+        </member>
+        <member name="P:BetterEMS.Patients.Death.CauseOfDeath.msSinceDeath">
+            <summary>
+            Returns the milliseconds since the ped died
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:BetterEMS.Response.ResponseManager.OriginalClonedPeds">
+            <summary>
+            Key = The new (cloned) ped, Value = The original (deleted) ped
+            </summary>
+        </member>
+        <member name="M:BetterEMS.Stations.Station.IsAreaAllowed(Rage.Vector3)">
+            <summary>
+             If the station is forced to only respond in certain areas, 
+             returns true if the given point is in its area of service. 
+             If no forced areas are specified, then always returns true. 
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BetterEMS.Stations.StationList.GetNearestStation(Rage.Vector3,BetterEMS.Stations.EStationType,System.Boolean)">
+            <summary>
+            Gets the nearest station of the specified type which 
+            is allowed to respond (based on forced areas) to the 
+            specified location. 
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMS">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMS.Station">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStation">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStation.SpawnPoints">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStation.RestrictAreas">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStation.VehicleSet">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStation.name">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStation.type">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStationPoint">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.name">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.x">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.y">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.z">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.h">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.delivery">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationPoint.deliverySpecified">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStationVehicleSet">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSet.Vehicles">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSet.Peds">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSet.NumPeds">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSet.chance">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSet.chanceSpecified">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.name">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.chance">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.chanceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.livery">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.liverySpecified">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.color">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.colorSpecified">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetVehicle.Value">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStationVehicleSetPed">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetPed.EUP">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetPed.EUPSpecified">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetPed.chance">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetPed.chanceSpecified">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetPed.Value">
+            <remarks/>
+        </member>
+        <member name="T:BetterEMS.xsdinfo.EMSStationVehicleSetNumPeds">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetNumPeds.min">
+            <remarks/>
+        </member>
+        <member name="P:BetterEMS.xsdinfo.EMSStationVehicleSetNumPeds.max">
+            <remarks/>
+        </member>
+    </members>
+</doc>

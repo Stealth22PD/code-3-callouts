@@ -104,8 +104,14 @@
     <Reference Include="Arrest Manager">
       <HintPath>..\..\DLLs\Arrest Manager.dll</HintPath>
     </Reference>
+    <Reference Include="BetterEMS">
+      <HintPath>..\..\DLLs\BetterEMS.dll</HintPath>
+    </Reference>
     <Reference Include="ComputerPlus">
       <HintPath>..\..\DLLs\ComputerPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomBackupLocations">
+      <HintPath>..\..\DLLs\CustomBackupLocations.dll</HintPath>
     </Reference>
     <Reference Include="LSPD First Response">
       <HintPath>..\..\DLLs\LSPD First Response.dll</HintPath>
@@ -184,7 +190,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Audio\AudioDatabase.cs" />
     <Compile Include="Util\Audio\AudioPlayerEngine.cs" />
+    <Compile Include="Util\BetterEMSFunctions.cs" />
     <Compile Include="Util\ComputerPlusFunctions.cs" />
+    <Compile Include="Util\CustomBackupFunctions.cs" />
     <Compile Include="Util\Extensions\EnumExtensions.cs" />
     <Compile Include="Util\Extensions\PedExtensions.cs" />
     <Compile Include="Util\Logger.cs" />
@@ -461,7 +469,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Police Scanner\Code 3 Audio\DISPATCH\ATTENTION\ATTENTION_ALL_UNITS.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
