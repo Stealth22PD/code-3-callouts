@@ -100,7 +100,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 
 			if (typeFactor >= 3) {
 				SuspectType = SuspectTypeEnum.Suspect;
-				p = new LSPD_First_Response.Engine.Scripting.Entities.Persona(pSuspect, p.Gender, p.BirthDay, p.Citations, p.Forename, p.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Suspended, p.TimesStopped, true, false,
+				p = BuildPersona(pSuspect, p.Gender, p.Birthday, p.Citations, p.Forename, p.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Suspended, p.TimesStopped, true, false,
 				false);
 				Functions.SetPersonaForPed(pSuspect, p);
 				Logger.LogVerboseDebug("SuspectType = Suspect");
@@ -139,7 +139,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 						break;
 				}
 
-				p = new LSPD_First_Response.Engine.Scripting.Entities.Persona(pSuspect, p.Gender, p.BirthDay, 0, p.Forename, p.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, mIsAgent,
+				p = BuildPersona(pSuspect, p.Gender, p.Birthday, 0, p.Forename, p.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, mIsAgent,
 				mIsCop);
 				LSPD_First_Response.Mod.API.Functions.SetPersonaForPed(pSuspect, p);
 				pSuspect.BlockPermanentEvents = false;

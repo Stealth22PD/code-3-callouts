@@ -17,6 +17,7 @@ using System.Diagnostics;
 using static Stealth.Plugins.Code3Callouts.Util.Audio.AudioPlayerEngine;
 using static Stealth.Plugins.Code3Callouts.Util.Audio.AudioDatabase;
 using System.Windows.Forms;
+using LSPD_First_Response.Engine.Scripting.Entities;
 
 namespace Stealth.Plugins.Code3Callouts
 {
@@ -413,6 +414,24 @@ namespace Stealth.Plugins.Code3Callouts
             } else {
                 return false;
             }
+        }
+
+        internal static Persona BuildPersona(Ped Ped, LSPD_First_Response.Gender Gender, DateTime Birthday, int Citations, string Forename, string Surname, ELicenseState LicenseState, int TimesStopped, bool IsWanted, bool IsAgent, bool IsCop)
+        {
+            Persona Persona = Functions.GetPersonaForPed(Ped);
+            Persona.Gender = Gender;
+            Persona.Birthday = Birthday;
+            Persona.Citations = Citations;
+            Persona.Forename = Forename;
+            Persona.Surname = Surname;
+            Persona.ELicenseState = LicenseState;
+            Persona.TimesStopped = TimesStopped;
+            Persona.Wanted = IsWanted;
+
+            if (IsAgent || IsCop)
+                Functions.SetPedAsCop(Ped);
+
+            return Persona;
         }
 
         internal static float GetHeadingToPoint(Vector3 pOriginPoint, Vector3 pDestinationPoint)

@@ -206,10 +206,10 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 				pDataSuspect = LSPD_First_Response.Mod.API.Functions.GetPersonaForPed(pSuspect);
 				int mSuspectWanted = Common.gRandom.Next(3);
 				if (mSuspectWanted == 0) {
-					pDataSuspect = new Persona(pSuspect, Gender.Male, pDataSuspect.BirthDay, 0, pDataSuspect.Forename, pDataSuspect.Surname, ELicenseState.Valid, 5, true, false,
+					pDataSuspect = BuildPersona(pSuspect, Gender.Male, pDataSuspect.Birthday, 0, pDataSuspect.Forename, pDataSuspect.Surname, ELicenseState.Valid, 5, true, false,
 					false);
 				} else {
-					pDataSuspect = new Persona(pSuspect, Gender.Male, pDataSuspect.BirthDay, 0, pDataSuspect.Forename, pDataSuspect.Surname, ELicenseState.Valid, 5, false, false,
+					pDataSuspect = BuildPersona(pSuspect, Gender.Male, pDataSuspect.Birthday, 0, pDataSuspect.Forename, pDataSuspect.Surname, ELicenseState.Valid, 5, false, false,
 					false);
 				}
 				LSPD_First_Response.Mod.API.Functions.SetPersonaForPed(pSuspect, pDataSuspect);
@@ -217,10 +217,10 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 				pDataVictim = LSPD_First_Response.Mod.API.Functions.GetPersonaForPed(pVictim);
 				int mVictimWanted = Common.gRandom.Next(5);
 				if (mVictimWanted == 0) {
-					pDataVictim = new Persona(pVictim, Gender.Female, pDataVictim.BirthDay, 0, pDataVictim.Forename, pDataVictim.Surname, ELicenseState.Valid, 0, true, false,
+					pDataVictim = BuildPersona(pVictim, Gender.Female, pDataVictim.Birthday, 0, pDataVictim.Forename, pDataVictim.Surname, ELicenseState.Valid, 0, true, false,
 					false);
 				} else {
-					pDataVictim = new Persona(pVictim, Gender.Female, pDataVictim.BirthDay, 0, pDataVictim.Forename, pDataVictim.Surname, ELicenseState.Valid, 0, false, false,
+					pDataVictim = BuildPersona(pVictim, Gender.Female, pDataVictim.Birthday, 0, pDataVictim.Forename, pDataVictim.Surname, ELicenseState.Valid, 0, false, false,
 					false);
 				}
 				LSPD_First_Response.Mod.API.Functions.SetPersonaForPed(pVictim, pDataVictim);

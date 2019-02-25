@@ -163,8 +163,8 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 				}
 
 				LSPD_First_Response.Engine.Scripting.Entities.Persona pDataVictim = Functions.GetPersonaForPed(pedVictim);
-				if (pDataVictim.Wanted | pDataVictim.LicenseState != LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid) {
-					pDataVictim = new LSPD_First_Response.Engine.Scripting.Entities.Persona(pedVictim, pDataVictim.Gender, pDataVictim.BirthDay, pDataVictim.Citations, pDataVictim.Forename, pDataVictim.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, pDataVictim.TimesStopped, false, false,
+				if (pDataVictim.Wanted | pDataVictim.ELicenseState != LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid) {
+					pDataVictim = BuildPersona(pedVictim, pDataVictim.Gender, pDataVictim.Birthday, pDataVictim.Citations, pDataVictim.Forename, pDataVictim.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, pDataVictim.TimesStopped, false, false,
 					false);
 					Functions.SetPersonaForPed(pedVictim, pDataVictim);
 				}

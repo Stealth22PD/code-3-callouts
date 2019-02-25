@@ -428,10 +428,10 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 			DetectiveState = EDetectiveState.Created;
 
 			System.DateTime DoB = Common.GetRandomDateOfBirth();
-			string name = LSPD_First_Response.Engine.Scripting.Entities.Persona.GetRandomFullName();
+			string name = LSPD_First_Response.Engine.Scripting.Entities.PersonaHelper.GetRandomFullName();
 			string[] nameParts = name.Split(' ');
 			detName = nameParts[1];
-            LSPD_First_Response.Engine.Scripting.Entities.Persona p = new LSPD_First_Response.Engine.Scripting.Entities.Persona(det, Gender.Male, DoB, 0, nameParts[0], nameParts[1], LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, false,
+            LSPD_First_Response.Engine.Scripting.Entities.Persona p = BuildPersona(det, Gender.Male, DoB, 0, nameParts[0], nameParts[1], LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, false,
 			true);
 			det.Inventory.GiveNewWeapon(new WeaponDescriptor("WEAPON_PISTOL"), 56, false);
 			LSPD_First_Response.Mod.API.Functions.SetPersonaForPed(det, p);

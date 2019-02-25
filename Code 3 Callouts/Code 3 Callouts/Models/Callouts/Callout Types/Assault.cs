@@ -440,7 +440,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts.CalloutTypes
 			w.PhysicalCondition = "Subject speaking normally, and making eye contact when he speaks.";
 
             LSPD_First_Response.Engine.Scripting.Entities.Persona pWitness = Functions.GetPersonaForPed(w);
-            LSPD_First_Response.Engine.Scripting.Entities.Persona pNewWitness = new LSPD_First_Response.Engine.Scripting.Entities.Persona(w, pWitness.Gender, pWitness.BirthDay, 0, pWitness.Forename, pWitness.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, false,
+            LSPD_First_Response.Engine.Scripting.Entities.Persona pNewWitness = BuildPersona(w, pWitness.Gender, pWitness.Birthday, 0, pWitness.Forename, pWitness.Surname, LSPD_First_Response.Engine.Scripting.Entities.ELicenseState.Valid, 0, false, false,
 			false);
 			Functions.SetPersonaForPed(w, pNewWitness);
 
