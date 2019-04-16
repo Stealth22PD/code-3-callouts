@@ -10,9 +10,9 @@ namespace Stealth.Plugins.Code3Callouts
     {
         internal const int LCPDFRDownloadID = 8082;
 
-        internal const string ReqCommonVersion = "1.7.6326.22563";
-        internal const string ReqRPHVersion = "0.52.1061.10387";
-        internal const string ReqLSPDFRVersion = "0.3.38.5436";
+        internal const string ReqCommonVersion = "2.0.6685.38422";
+        internal const string ReqRPHVersion = "0.62.1216.14731";
+        internal const string ReqLSPDFRVersion = "0.4.39.22580";
         internal const string ReqRNUIVersion = "1.5.1.0";
     }
 }

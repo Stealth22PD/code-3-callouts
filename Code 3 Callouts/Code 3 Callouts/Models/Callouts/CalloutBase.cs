@@ -114,7 +114,7 @@ namespace Stealth.Plugins.Code3Callouts.Models.Callouts
                     {
                         LSPD_First_Response.Engine.Scripting.Entities.Persona pData = Functions.GetPersonaForPed(Common.ClosestPed);
                         string IDTextFormat = "~b~{0}~n~~y~{1}, ~w~Born: ~y~{2}";
-                        string IDText = string.Format(IDTextFormat, pData.FullName, pData.Gender.ToString(), pData.BirthDay.ToString("M/d/yyyy"));
+                        string IDText = string.Format(IDTextFormat, pData.FullName, pData.Gender.ToString(), pData.Birthday.ToString("M/d/yyyy"));
 
                         Game.DisplayNotification("mpcharselect", "mp_generic_avatar", "STATE ISSUED IDENTIFICATION", pData.FullName.ToUpper(), IDText);
                     }
